@@ -1,61 +1,37 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/HIalA3bE)
-# 🛒 React JS - Midterm Project
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/7PNkbV4c)
+# React JS - Final Project
 
-**Goal:** Design and create a shopping web application using **React**, **Tailwind CSS**, **NodeJS**, and **Express** with login and sign-up functionality.
+**Goal:** Create a shopping website with your category of choice (electronics, food, clothes, toys, etc.)
 
-🎯 **Bonus Challenge:** Integrate Stripe Checkout for payments!
+## Installation ⚙
 
-## 📌 Instructions
+Create a NextJS project with `npx create-next-app final-project`.
 
-1. **Decide** on the shopping website idea you or your team will build. Example: clothing shop, tech gadgets store, etc.
-2. **Design** your user interface on [Figma](https://figma.com) before coding.
-3. **Set up** your backend server with Express and connect it to a database (MongoDB, PostgreSQL, Firebase, or Supabase are all fine).
-4. **Build** your frontend using React and Tailwind CSS based on your Figma design.
-5. **Test** your login, sign-up, and shopping flows.
-6. **Commit & push** your changes regularly with clear messages.
+## Requirements ✅
 
-## 🔧 Project Requirements
+- You must use a database (MongoDB or Postgres) for data storage.
+- There should be two roles, one for user and one for admin. Admin can add new products while the user can only view and checkout.
+- Implement checkout using Stripe or PayPal API.
+- Your website should have these pages:
 
-### 🖼️ Frontend
-
-- Built using **ReactJS** and **Tailwind CSS**
-- Use UI libraries like [shadcn/ui](https://ui.shadcn.com) or [HeroUI](https://heroui.com/) if helpful
-- Fully responsive layout (desktop & mobile)
-- Pages/Routes to include but not limited to:
   - Home
-  - Products (List & Detail)
-  - Cart
-  - Login & Signup
-  - Admin Dashboard (Admin-only)
-  - Checkout (optional)
+  - Login/Signup page
+  - Products List with images and Add to Cart button
+  - Add Product page
+  - Edit Product page
+  - View Product Detail page
+  - View Cart page
+  - Checkout page
+  - About page
+  - Contact page with a working contact form
 
-### 🛠️ Backend
+- The website should have CRUD functionality (Create, Retrieve, Update, Delete). Use **Server Actions** or **Route Handlers**.
+- For the product images, use Cloudinary API to store your images and save the image url into your database [https://cloudinary.com/].
+- You must have a Shopping Cart sidebar showing the products you added to cart. The same products will appear on the View Cart page.
+- Clicking on the product image on the Product List page should open a modal showing the product image. Use parallel and intercepting routes to achieve this. On the modal, you can display details like Product Name, Product Price, Product Image, Add to Cart button.
 
-- Use **NodeJS** and **Express** to create your API
-- Use any database of your choice (e.g., **MongoDB**, **Firebase**, **Supabase**, **PostgreSQL**)
-- Implement user **roles**:
+## Tips 💡
 
-  - **User**: can browse products, manage their cart, and checkout
-  - **Admin**: can add, edit, and delete products
-
-- Store product, user, and cart data
-- Implement **CRUD** operations for products
-
-### 🧩 Functionality
-
-- User **sign-up** and **login**
-- Role-based access:
-  - Regular users can view products, add to cart, and checkout
-  - Admin users can manage products via an admin dashboard
-- View cart items and total price
-- All data should be stored and retrieved from the database
-
-## 💳 Bonus: Stripe Checkout
-
-Integrate [Stripe Checkout](https://stripe.com/docs/checkout) to allow users to simulate or make real purchases. You can use Stripe test mode for development.
-
-- Use the `stripe` npm package on the backend
-- Add a “Checkout” button that redirects users to Stripe Checkout
-- No real money needs to be charged
-
-Good luck! 💻🎉
+- Please check out Behance [https://www.behance.net/] for some inspiration for your design.
+- You can reuse your past projects' design and functionality.
+- If you are going to use a Google Font, NextJS can support it [https://nextjs.org/docs/app/building-your-application/optimizing/fonts#google-fonts].
