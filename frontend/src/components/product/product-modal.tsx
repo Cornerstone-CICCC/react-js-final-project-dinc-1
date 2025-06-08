@@ -43,7 +43,7 @@ const ProductModal = ({ productId, open, onClose }: ProductModalProps) => {
       <Dialog open={open} onOpenChange={onClose}>
         <DialogPortal>
           <DialogOverlay className="!z-[9998]" style={{ zIndex: 9998 }} />
-          <DialogContent 
+          <DialogContent
             className="!max-w-none !w-[70vw] !max-h-[95vh] overflow-y-auto p-0 !z-[9999]"
             style={{ width: '70vw', maxWidth: 'none', zIndex: 9999 }}
           >
@@ -89,7 +89,7 @@ const ProductModal = ({ productId, open, onClose }: ProductModalProps) => {
     <Dialog open={open} onOpenChange={onClose}>
       <DialogPortal>
         <DialogOverlay className="!z-[9998]" style={{ zIndex: 9998 }} />
-        <DialogContent 
+        <DialogContent
           className="!max-w-none !w-[70vw] !max-h-[95vh] overflow-y-auto p-0 !z-[9999]"
           style={{ width: '70vw', maxWidth: 'none', zIndex: 9999 }}
         >
@@ -165,7 +165,9 @@ const ProductModal = ({ productId, open, onClose }: ProductModalProps) => {
                       href={isOwner ? `/profile` : `/user/${data.user?.id}`}
                       onClick={() => {
                         onClose();
-                        router.push(isOwner ? `/profile` : `/user/${data.user?.id}`);
+                        setTimeout(() => {
+                          router.push(isOwner ? `/profile` : `/user/${data.user?.id}`);
+                        }, 100);
                       }}
                       className="hover:underline"
                     >
@@ -180,7 +182,9 @@ const ProductModal = ({ productId, open, onClose }: ProductModalProps) => {
                     size={'lg'}
                     onClick={() => {
                       onClose();
-                      router.push(`/work/edit`);
+                      setTimeout(() => {
+                        router.push(`/work/edit`);
+                      }, 100);
                     }}
                   >
                     <span className="uppercase text-lg">Edit</span>
@@ -191,7 +195,9 @@ const ProductModal = ({ productId, open, onClose }: ProductModalProps) => {
                     size={'lg'}
                     onClick={() => {
                       onClose();
-                      router.push('/payment');
+                      setTimeout(() => {
+                        router.push('/payment');
+                      }, 100);
                     }}
                   >
                     <span className="uppercase text-lg">Purchase</span>
