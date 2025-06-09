@@ -2,17 +2,16 @@
 
 import ProductModal from '@/components/product/product-modal';
 import { useRouter } from 'next/navigation';
-import { use, useEffect } from 'react';
+import { useEffect } from 'react';
 import useSearchParamsStore from '@/stores/useSearchParamsStore';
 
 type PageParams = {
   productId: string;
 };
 
-const ProductModalPage = ({ params }: { params: Promise<PageParams> }) => {
+const ProductModalPage = ({ params }: { params: PageParams }) => {
   const router = useRouter();
-  const resolvedParams = use(params);
-  const { productId } = resolvedParams;
+  const { productId } = params;
   const { preservedSearchParams } = useSearchParamsStore();
 
   useEffect(() => {
