@@ -6,7 +6,7 @@ const Footer = () => {
       <p className="uppercase text-muted-foreground text-sm">
         &copy; {new Date().getFullYear()} DINCT. All rights reserved.
       </p>
-      <nav>
+      <nav aria-label="Footer navigation">
         <ul className="flex flex-col gap-2 text-right">
           <li>
             <Link href="/about">ABOUT</Link>
