@@ -1,10 +1,8 @@
-'use client';
-
 import { useEffect } from 'react';
 import { useSearchParams, usePathname } from 'next/navigation';
 import useSearchParamsStore from '@/stores/useSearchParamsStore';
 
-const SearchParamsHandler = () => {
+const usePreserveSearchParams = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { setPreservedSearchParams } = useSearchParamsStore();
@@ -14,8 +12,6 @@ const SearchParamsHandler = () => {
       setPreservedSearchParams(new URLSearchParams(searchParams.toString()));
     }
   }, [pathname, searchParams, setPreservedSearchParams]);
-
-  return null;
 };
 
-export default SearchParamsHandler;
+export default usePreserveSearchParams;
