@@ -12,3 +12,9 @@ export interface Product {
   updatedAt: string;
   user: User;
 }
+
+export interface LineItem {
+  productName: string;
+  unitAmount: number;
+  quantity: number;
+}

@@ -13,12 +13,12 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { LineItem } from '@/types/product';
+import { useCheckout } from '@/hooks/useCheckout';
 
-interface ShippingFormProps {
-  loading?: boolean;
-}
+export const ShippingForm = () => {
+  const { createCheckoutSession, loading, checkoutError } = useCheckout();
 
-export const ShippingForm = ({ loading = false }: ShippingFormProps) => {
   const form = useForm<ShippingFormInputs>({
     resolver: zodResolver(shippingSchema),
     defaultValues: {
@@ -35,6 +35,19 @@ export const ShippingForm = ({ loading = false }: ShippingFormProps) => {
 
   const onSubmit = (data: ShippingFormInputs) => {
     console.log(data);
+
+    const purchaseData: { line_items: LineItem[] } = {
+      line_items: [
+        { productName: 'Sample Product', unitAmount: 1, quantity: 1 },
+        { productName: 'Another Product', unitAmount: 1, quantity: 2 },
+      ],
+    };
+
+    createCheckoutSession(purchaseData.line_items);
+
+    if (checkoutError) {
+      console.error(checkoutError);
+    }
   };
 
   return (
@@ -197,7 +210,7 @@ export const ShippingForm = ({ loading = false }: ShippingFormProps) => {
       <div className="flex justify-end">
         <Button
           type="submit"
-          className="w-1/2 p-5"
+          className="lg:w-1/2 w-full p-5"
           disabled={loading}
           onClick={form.handleSubmit(onSubmit)}
         >

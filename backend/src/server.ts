@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import authRouter from './routes/authRoutes';
 import userRouter from './routes/userRoutes';
 import productRouter from './routes/productRoutes';
+import checkoutRouter from './routes/checkoutRoutes';
 
 dotenv.config();
 
@@ -29,6 +30,7 @@ app.get('/', (req: Request, res: Response) => {
 app.use('/auth', authRouter);
 app.use('/products', productRouter);
 app.use('/users', userRouter);
+app.use('/checkout', checkoutRouter);
 
 const PORT = process.env.PORT || 4500;
 

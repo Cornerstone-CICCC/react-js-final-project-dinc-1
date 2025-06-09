@@ -10,3 +10,9 @@ export interface IProduct extends mongoose.Document {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface IProductLineItem {
+  productName: string;
+  unitAmount: number;
+  quantity: number;
+}

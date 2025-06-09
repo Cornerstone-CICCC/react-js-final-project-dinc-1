@@ -22,7 +22,7 @@ const PaymentPage = () => {
       <Head>
         <title>{document.title}</title>
       </Head>
-      <div className="flex gap-8">
+      <div className="flex gap-8 lg:flex-row flex-col">
         <div className="flex-1">
           <div className="bg-white rounded-2xl shadow-sm border-1 border-gray-200">
             <div className="flex flex-col justify-start items-start p-6 space-y-6">
