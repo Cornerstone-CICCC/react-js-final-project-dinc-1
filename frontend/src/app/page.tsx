@@ -12,7 +12,6 @@ const Home = () => {
   const pageTitle = 'Home - DINCT';
   const searchParams = useSearchParams();
   const { preservedSearchParams } = usePreservedSearchParams();
-  
   // Use current search params or preserved search params
   const currentSearchParams = searchParams.toString() ? searchParams : preservedSearchParams;
   const searchQuery = currentSearchParams?.get('search') || '';
