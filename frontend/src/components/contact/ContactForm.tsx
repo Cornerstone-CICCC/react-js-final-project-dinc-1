@@ -15,21 +15,27 @@ import { useForm } from 'react-hook-form';
 import { Button } from '../ui/button';
 import { ContactFormData, contactFormSchema } from '@/schemas/contactSchema';
 import { Textarea } from '../ui/textarea';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 import { CommonAlert } from '../ui/common-alert';
 import { useState } from 'react';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogTitle,
-} from '../ui/dialog';
 
 const ContactForm = () => {
-  const [showDialog, setShowDialog] = useState<boolean>(false);
-  const router = useRouter();
+  // const [showDialog, setShowDialog] = useState<boolean>(false);
+  const [alertConfig, setAlertConfig] = useState<{
+    show: boolean;
+    variant: 'default' | 'destructive';
+    title: string;
+    description: string;
+  }>({
+    show: false,
+    variant: 'default',
+    title: '',
+    description: '',
+  });
 
-  const [showAlert, setShowAlert] = useState<boolean>(false);
+  // const router = useRouter();
+
+  // const [showAlert, setShowAlert] = useState<boolean>(false);
 
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
@@ -61,7 +67,14 @@ const ContactForm = () => {
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
       );
 
-      console.log(result.status);
+      if (result.status === 200) {
+        setAlertConfig({
+          show: true,
+          variant: 'default',
+          title: 'We Got Your Message!',
+          description: 'Your message was sent successfully. Thank you!',
+        });
+      }
       form.reset({
         name: '',
         email: '',
@@ -69,15 +82,15 @@ const ContactForm = () => {
         address: '',
         message: '',
       });
-
-      setShowDialog(true);
-      setTimeout(() => {
-        router.push('/');
-        setShowDialog(false);
-      }, 3000);
     } catch (error) {
       console.error(error);
-      setShowAlert(true);
+      setAlertConfig({
+        show: true,
+        variant: 'destructive',
+        title: 'Something Went Wrong',
+        description:
+          'There was a problem sending your message. Please try again.',
+      });
     }
   };
 
@@ -85,10 +98,10 @@ const ContactForm = () => {
     <>
       <div className="pb-6">
         <CommonAlert
-          show={showAlert}
-          variant="destructive"
-          title="Error"
-          description="Something wrong, try again"
+          show={alertConfig.show}
+          variant={alertConfig.variant}
+          title={alertConfig.title}
+          description={alertConfig.description}
         />
       </div>
       <div className="max-w-xl mx-auto py-10 md:py-20">
@@ -180,8 +193,7 @@ const ContactForm = () => {
                     <FormControl>
                       <Textarea
                         placeholder="Type your message here..."
-                        className="text-md"
-                        rows={5}
+                        className="text-md resize-none h-40"
                         {...field}
                       />
                     </FormControl>
@@ -196,12 +208,6 @@ const ContactForm = () => {
           </Form>
         </div>
       </div>
-      <Dialog open={showDialog}>
-        <DialogContent>
-          <DialogTitle>Thank you for your message!</DialogTitle>
-          <DialogDescription>Redirecting to homepage...{}</DialogDescription>
-        </DialogContent>
-      </Dialog>
     </>
   );
 };
