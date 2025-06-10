@@ -6,12 +6,16 @@ import ProductList from '@/components/product/product-list';
 import { useSearchParams } from 'next/navigation';
 import { useDebounce } from 'use-debounce';
 import { useEffect } from 'react';
+import useSearchParamsStore from '@/stores/useSearchParamsStore';
 
 const Home = () => {
   const pageTitle = 'Home - DINCT';
   const searchParams = useSearchParams();
-  const searchQuery = searchParams.get('search') || '';
-  const searchCategory = searchParams.get('category') || '';
+  const { preservedSearchParams } = useSearchParamsStore();
+  // Use current search params or preserved search params
+  const currentSearchParams = searchParams.toString() ? searchParams : preservedSearchParams;
+  const searchQuery = currentSearchParams?.get('search') || '';
+  const searchCategory = currentSearchParams?.get('category') || '';
   const [debouncedHandleSearch] = useDebounce(searchQuery, 1000);
 
   useEffect(() => {
