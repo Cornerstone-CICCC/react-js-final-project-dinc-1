@@ -3,15 +3,23 @@
 import { useState } from 'react';
 import { LineItem } from '@/types/product';
 import { loadStripe } from '@stripe/stripe-js';
+import useUserStore from '@/stores/useUserStore';
+
 
 export const useCheckout = () => {
   const [loading, setLoading] = useState(false);
   const [checkoutError, setCheckoutError] = useState("");
   const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || '';
+  const { user } = useUserStore();
 
   const createCheckoutSession = async (lineItems: LineItem[]) => {
     setLoading(true);
     setCheckoutError("");
+
+    if (!user) {
+      setCheckoutError("User not found");
+      return;
+    }
 
     try {
       const response = await fetch(`${apiBaseUrl}/checkout/create-checkout-session`, {
@@ -19,7 +27,7 @@ export const useCheckout = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ line_items: lineItems }),
+        body: JSON.stringify({ line_items: lineItems, userId: user.id }),
       });
 
       if (!response.ok) {

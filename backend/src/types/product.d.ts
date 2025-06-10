@@ -16,3 +16,8 @@ export interface IProductLineItem {
   unitAmount: number;
   quantity: number;
 }
+
+export interface IOrder extends mongoose.Document {
+  userId: mongoose.Schema.Types.ObjectId;
+  lineItems: IProductLineItem[];
+}

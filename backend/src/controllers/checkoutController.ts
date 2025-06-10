@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import Stripe from 'stripe';
 import { IProductLineItem } from '../types/product';
+import Order from '../models/orderModel';
 
 export const createCheckoutSession = async (
   req: Request,
@@ -13,6 +14,11 @@ export const createCheckoutSession = async (
     const frontendUrl = process.env.FRONTEND_URL || '';
 
     const line_items = req.body.line_items;
+    const userId = req.body.userId;
+
+    // Save order to database
+    const order = new Order({ userId, lineItems: line_items });
+    await order.save();
 
     const stripeLineItems = line_items.map((item: IProductLineItem) => ({
       price_data: {
