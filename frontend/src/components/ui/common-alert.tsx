@@ -1,4 +1,4 @@
-import { AlertCircle } from 'lucide-react';
+import { AlertCircle, CheckCircle2Icon } from 'lucide-react';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 
 interface CommonAlertProps {
@@ -18,7 +18,11 @@ function CommonAlert({
 
   return (
     <Alert variant={variant} className="flex items-center space-x-2">
-      <AlertCircle className="h-4 w-4" />
+      {variant === 'default' ? (
+        <CheckCircle2Icon />
+      ) : (
+        <AlertCircle className="h-4 w-4" />
+      )}
       <div>
         <AlertTitle>{title}</AlertTitle>
         {description && (
