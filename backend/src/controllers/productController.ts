@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from 'express';
 import Product from '../models/productModel';
 import mongoose from 'mongoose';
 import { RequestWithUser } from '../middlewares/authMiddleware';
-import { lookup } from 'dns';
 
 export const getProducts = async (
   req: Request,
