@@ -8,19 +8,18 @@ const About = () => {
       <div className="text-center space-y-4 py-8 md:py-30">
         <h1 className="text-2xl md:text-5xl font-bold">
           Welcome to
-          <span className="block text-5xl md:text-8xl">
+          <span className="block text-6xl md:text-8xl">
             <AuroraText colors={['#F6D4BA, #FEEA00, #F3B391']}>
               VANCART
             </AuroraText>
           </span>
         </h1>
-        <h2 className="text-lg font-semibold">
+        <p className="text-lg font-semibold">
           &ldquo;Buy, sell, and smile — a happy marketplace for everyone in
           Vancouver.&rdquo;
-        </h2>
+        </p>
       </div>
       <div className="pb-12">
-        {/**bg-[#F6D4BA] */}
         <div className="max-w-2xl mx-auto space-y-5">
           <p>
             At <strong>VANCART</strong>, we believe that shopping should be
@@ -35,10 +34,10 @@ const About = () => {
           </p>
         </div>
       </div>
+      {/** Why Vancart */}
       <div className="pb-12">
-        {/**bg-[#F6D4BA] */}
         <div className="max-w-2xl mx-auto space-y-5">
-          <h3 className="text-2xl font-semibold">Why VANCART?</h3>
+          <h2 className="text-4xl font-semibold">Why VANCART?</h2>
           <ul className="space-y-3">
             <li>✨ Simple and intuitive shopping experience</li>
             <li>✨ Safe and trusted transactions</li>
@@ -55,8 +54,8 @@ const About = () => {
       </div>
       {/** how it works */}
       <div className="py-8 max-w-4xl mx-auto space-y-4 md:grid md:grid-cols-2 md:gap-4">
-        <div className="space-y-5 rounded-2xl p-4 bg-gradient-to-br from-[#F6D4BA]/50 to-white relative h-full">
-          <h3 className="text-4xl font-semibold">How It Works</h3>
+        <div className="space-y-5 rounded-2xl p-6 bg-gradient-to-br from-[#F6D4BA]/50 to-white relative h-full">
+          <h2 className="text-4xl font-semibold">How It Works</h2>
           <ol className="space-y-3">
             <li>
               <strong>Browse</strong> our wide selection of categories — from
@@ -76,8 +75,9 @@ const About = () => {
             </li>
           </ol>
         </div>
-        <div className="space-y-5 rounded-2xl p-4 bg-gradient-to-tl from-[#FEEA00]/50 to-white relative">
-          <h3 className="text-4xl font-semibold">Our Values</h3>
+        {/** our values*/}
+        <div className="space-y-5 rounded-2xl p-6 bg-gradient-to-tl from-[#FEEA00]/50 to-white relative">
+          <h2 className="text-4xl font-semibold">Our Values</h2>
           <ul className="space-y-3">
             <li>
               <strong>🌱 Sustainability</strong> — We encourage giving items a
@@ -102,57 +102,58 @@ const About = () => {
       {/** team */}
       <div className="py-12 relative">
         <div className="space-y-4">
-          <div className="max-w-2xl mx-auto">
-            <h3 className="text-2xl font-semibold">Our Team</h3>
-            <h4>The people behind Happy Dinca Market</h4>
+          <div className="max-w-2xl mx-auto space-y-2">
+            <h2 className="text-4xl font-semibold">Our Team</h2>
+            <p className="text-muted-foreground">The people behind VANCART</p>
             <p>
-              Happy Dinca Market is built by a small, passionate team who
-              believe in creating better shopping experiences for everyone. We
-              work hard every day to make the platform safe, smooth, and
-              delightful to use.
+              VANCART is built by a small, passionate team who believe in
+              creating better shopping experiences for everyone. We work hard
+              every day to make the platform safe, smooth, and delightful to
+              use.
             </p>
           </div>
           <div className="max-w-4xl mx-auto">
             <ul className="grid grid-cols-2 gap-3 md:grid-cols-4">
               <li className="flex flex-col items-center text-center h-full bg-gradient-to-t from-gray-100 to-gray-50 rounded-xl p-5">
                 <div className="rounded-full w-[100px] h-[100px] bg-white mb-2"></div>
-                <strong className="font-semibold">Daz</strong>
-                <span className="text-sm">Marketing & Growth</span>
-                <span className="text-xs text-muted-foreground">
-                  Spreads the word and grows our community.
-                </span>
-              </li>
-              <li className="flex flex-col items-center text-center h-full bg-gradient-to-t from-gray-100 to-gray-50 rounded-xl p-5">
-                <div className="rounded-full w-[100px] h-[100px] bg-white mb-2"></div>
                 <strong className="font-semibold">Iki</strong>
-                <span className="text-sm">Community & Support</span>
+                <span className="text-sm">Community & Experience Lead</span>
                 <span className="text-xs text-muted-foreground">
-                  Helps users and builds a friendly community.
+                  Keeps everything running smoothly.
                 </span>
               </li>
               <li className="flex flex-col items-center text-center h-full bg-gradient-to-t from-gray-100 to-gray-50 rounded-xl p-5">
                 <div className="rounded-full w-[100px] h-[100px] bg-white mb-2"></div>
                 <strong className="font-semibold">Nana</strong>
-                <span className="text-sm">Founder & Design</span>
+                <span className="text-sm">Founder & Creative Director</span>
                 <span className="text-xs text-muted-foreground">
-                  Leads product design and vision.
+                  Shapes the vision, design, and experience of Vancart
+                </span>
+              </li>
+              <li className="flex flex-col items-center text-center h-full bg-gradient-to-t from-gray-100 to-gray-50 rounded-xl p-5">
+                <div className="rounded-full w-[100px] h-[100px] bg-white mb-2"></div>
+                <strong className="font-semibold">Daz</strong>
+                <span className="text-sm">Engineer</span>
+                <span className="text-xs text-muted-foreground">
+                  Builds and maintains our platform.
                 </span>
               </li>
               <li className="flex flex-col items-center text-center h-full bg-gradient-to-t from-gray-100 to-gray-50 rounded-xl p-5">
                 <div className="rounded-full w-[100px] h-[100px] bg-white mb-2"></div>
                 <strong className="font-semibold">Chloe</strong>
-                <span className="text-sm">Lead Developer</span>
+                <span className="text-sm">Marketing & Growth</span>
                 <span className="text-xs text-muted-foreground">
-                  Builds and maintains our platform.
+                  Spreads the word and grows our community.
                 </span>
               </li>
             </ul>
           </div>
         </div>
       </div>
+      {/** join us */}
       <div className="pt-12 pb-18 relative">
-        <div className="max-w-2xl mx-auto">
-          <h3 className="text-4xl font-semibold">Join Us!</h3>
+        <div className="max-w-2xl mx-auto bg-amber-200/30 rounded-2xl p-10 space-y-3">
+          <h2 className="text-4xl font-bold">Join Us!</h2>
 
           <p>Ready to start buying and selling with ease and confidence?</p>
           <p>
