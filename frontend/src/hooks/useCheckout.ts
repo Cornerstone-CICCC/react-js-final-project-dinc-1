@@ -5,7 +5,6 @@ import { LineItem } from '@/types/product';
 import { loadStripe } from '@stripe/stripe-js';
 import useUserStore from '@/stores/useUserStore';
 
-
 export const useCheckout = () => {
   const [loading, setLoading] = useState(false);
   const [checkoutError, setCheckoutError] = useState("");

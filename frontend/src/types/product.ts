@@ -18,3 +18,10 @@ export interface LineItem {
   unitAmount: number;
   quantity: number;
 }
+
+export interface Order {
+  _id: string;
+  userId: string;
+  lineItems: LineItem[];
+  createdAt: string;
+}
