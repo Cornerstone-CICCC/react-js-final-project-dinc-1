@@ -18,8 +18,15 @@ import { Textarea } from '../ui/textarea';
 import { useRouter } from 'next/navigation';
 import { CommonAlert } from '../ui/common-alert';
 import { useState } from 'react';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from '../ui/dialog';
 
 const ContactForm = () => {
+  const [showDialog, setShowDialog] = useState<boolean>(false);
   const router = useRouter();
 
   const [showAlert, setShowAlert] = useState<boolean>(false);
@@ -63,9 +70,11 @@ const ContactForm = () => {
         message: '',
       });
 
+      setShowDialog(true);
       setTimeout(() => {
         router.push('/');
-      }, 5000);
+        setShowDialog(false);
+      }, 3000);
     } catch (error) {
       console.error(error);
       setShowAlert(true);
@@ -187,6 +196,12 @@ const ContactForm = () => {
           </Form>
         </div>
       </div>
+      <Dialog open={showDialog}>
+        <DialogContent>
+          <DialogTitle>Thank you for your message!</DialogTitle>
+          <DialogDescription>Redirecting to homepage...{}</DialogDescription>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
