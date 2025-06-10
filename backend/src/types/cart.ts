@@ -5,7 +5,7 @@ export interface ICartItem extends IProduct {
   quantity: number;
 }
 
-export interface ICart extends mongoose.Document {
+export interface ICart {
   id: string;
   userId: Schema.Types.ObjectId;
   status: 'active' | 'converted' | 'abandoned';

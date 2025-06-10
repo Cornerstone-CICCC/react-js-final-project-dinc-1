@@ -1,5 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import Cart from '../models/cartModel';
+import Product from '../models/productModel';
+import { Schema } from 'mongoose';
+import { ICartItem } from '../types/cart';
 
 export const getCarts = async (
   req: Request,
@@ -178,7 +181,24 @@ export const addItemToCart = async (
       cart.items[itemIndex].quantity += quantity;
     } else {
       // If item does not exist, add it to the cart
-      // cart.items.push({ productId, quantity });
+      const product = await Product.findById({
+        _id: new Schema.Types.ObjectId(productId),
+      });
+      if (!product) {
+        return res.status(404).json({ message: 'Product not found' });
+      }
+      const cartItem: ICartItem = {
+        id: product?._id.toString(),
+        name: product?.name,
+        price: product?.price,
+        description: product?.description,
+        imageUrl: product?.imageUrl,
+        category: product?.category,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        quantity: 1,
+      };
+      cart.items.push(cartItem);
     }
     cart.updatedAt = new Date();
     await cart.save();
