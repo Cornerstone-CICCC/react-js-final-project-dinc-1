@@ -9,7 +9,7 @@ const About = () => {
         <h1 className="text-2xl md:text-5xl font-bold">
           Welcome to
           <span className="block text-6xl md:text-8xl">
-            <AuroraText colors={['#F6D4BA, #FEEA00, #F3B391']}>
+            <AuroraText colors={['#F6D4BA', '#FEEA00', '#F3B391']}>
               VANCART
             </AuroraText>
           </span>
