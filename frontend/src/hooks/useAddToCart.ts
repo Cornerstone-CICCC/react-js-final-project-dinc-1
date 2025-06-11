@@ -23,11 +23,7 @@ export const useAddToCart = () => {
       };
 
       addItem(cartItem);
-
-      setTimeout(() => {
-        setIsOpen(true);
-      }, 100);
-
+      setIsOpen(true);
       return true;
     } catch (error) {
       console.error('Failed to add item to cart:', error);
