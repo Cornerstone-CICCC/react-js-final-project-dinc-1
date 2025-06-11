@@ -38,9 +38,11 @@ export const CartSidebar = () => {
               <span>Total:</span>
               <span>${totalPrice.toLocaleString()}</span>
             </div>
-            <Button className="w-full cursor-pointer" size="lg">
-              <span className="uppercase">Proceed to Checkout</span>
-            </Button>
+            <Link href="/checkout" passHref>
+              <Button className="w-full cursor-pointer" size="lg">
+                <span className="uppercase">Proceed to Checkout</span>
+              </Button>
+            </Link>
           </div>
         )}
       </SheetContent>
