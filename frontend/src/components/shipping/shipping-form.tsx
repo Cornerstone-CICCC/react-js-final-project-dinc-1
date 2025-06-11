@@ -38,8 +38,18 @@ export const ShippingForm = () => {
 
     const purchaseData: { line_items: LineItem[] } = {
       line_items: [
-        { productName: 'Sample Product', unitAmount: 1, quantity: 1 },
-        { productName: 'Another Product', unitAmount: 1, quantity: 2 },
+        {
+          productName: 'Sample Product2',
+          unitAmount: 1,
+          quantity: 1,
+          imageUrl: '/product1.png',
+        },
+        {
+          productName: 'Another Product',
+          unitAmount: 1,
+          quantity: 2,
+          imageUrl: '/product2.png',
+        },
       ],
     };
 
@@ -53,8 +63,13 @@ export const ShippingForm = () => {
   return (
     <div className="space-y-6">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 bg-white rounded-2xl shadow-sm border-1 border-gray-200 p-6">
-          <h3 className="font-semibold text-md mb-4">Enter your shipping details</h3>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-6 bg-white rounded-2xl shadow-sm border-1 border-gray-200 p-6"
+        >
+          <h3 className="font-semibold text-md mb-4">
+            Enter your shipping details
+          </h3>
           <FormField
             control={form.control}
             name="fullName"
@@ -118,11 +133,7 @@ export const ShippingForm = () => {
               <FormItem>
                 <FormLabel>Address</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="Address"
-                    disabled={loading}
-                    {...field}
-                  />
+                  <Input placeholder="Address" disabled={loading} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -137,11 +148,7 @@ export const ShippingForm = () => {
                 <FormItem>
                   <FormLabel>City</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="City"
-                      disabled={loading}
-                      {...field}
-                    />
+                    <Input placeholder="City" disabled={loading} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -155,11 +162,7 @@ export const ShippingForm = () => {
                 <FormItem>
                   <FormLabel>State</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="State"
-                      disabled={loading}
-                      {...field}
-                    />
+                    <Input placeholder="State" disabled={loading} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -219,4 +222,4 @@ export const ShippingForm = () => {
       </div>
     </div>
   );
-}; 
+};

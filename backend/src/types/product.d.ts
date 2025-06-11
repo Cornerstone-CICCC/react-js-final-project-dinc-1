@@ -15,6 +15,7 @@ export interface IProductLineItem {
   productName: string;
   unitAmount: number;
   quantity: number;
+  imageUrl: string;
 }
 
 export interface IOrder extends mongoose.Document {

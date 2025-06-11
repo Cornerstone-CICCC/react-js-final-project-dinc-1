@@ -17,6 +17,7 @@ export interface LineItem {
   productName: string;
   unitAmount: number;
   quantity: number;
+  imageUrl: string;
 }
 
 export interface Order {
