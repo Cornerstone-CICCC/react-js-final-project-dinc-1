@@ -29,21 +29,26 @@ const OrderHistoryList = () => {
                 key={index}
                 className={index > 0 ? 'border-t p-2 pt-3 mt-3' : 'p-2'}
               >
-                <div className="flex justify-between items-center">
-                  <Image
-                    src={item.imageUrl}
-                    alt={item.productName}
-                    width={100}
-                    height={100}
-                  />
-                  <p className="text-lg font-semibold truncate">
-                    {item.productName}
-                  </p>
-                  <div className="flex gap-3 items-center">
-                    <span className="text-md">${item.unitAmount}</span>
-                    <span className="text-muted-foreground text-sm">
-                      Qty: {item.quantity}
-                    </span>
+                <div className="flex gap-3 justify-between items-center">
+                  <div className="relative size-20 aspect-square">
+                    <Image
+                      src={item.imageUrl}
+                      alt={item.productName}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+
+                  <div className="flex flex-1 gap-3 justify-between md:items-center flex-col md:flex-row">
+                    <p className="text-lg font-semibold truncate">
+                      {item.productName}
+                    </p>
+                    <div className="flex gap-4 items-center justify-between">
+                      <span className="text-md">${item.unitAmount}</span>
+                      <span className="text-muted-foreground text-sm">
+                        Qty: {item.quantity}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
