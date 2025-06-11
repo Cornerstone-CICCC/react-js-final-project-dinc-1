@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import { CartSidebar } from '@/components/cart/cart-sidebar';
 import usePreserveSearchParams from '@/hooks/usePreserveSearchParams';
 import { ReactNode } from 'react';
 
@@ -36,6 +37,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <CartSidebar />
         {modal}
       </body>
     </html>
