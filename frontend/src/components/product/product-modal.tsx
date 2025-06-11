@@ -218,7 +218,7 @@ const ProductModal = ({ productId, open, onClose }: ProductModalProps) => {
                   </Button>
                 ) : (
                   <Button className="w-full h-12" size={'lg'} disabled>
-                    <span className="uppercase">Soldout</span>
+                    <span className="uppercase">Sold Out</span>
                   </Button>
                 )}
               </div>
