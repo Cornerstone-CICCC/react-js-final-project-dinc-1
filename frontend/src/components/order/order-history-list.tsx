@@ -10,18 +10,19 @@ const OrderHistoryList = () => {
   if (error || !orders) return <div>Error: {error?.message}</div>;
 
   return (
-    <div className="max-w-3xl mx-auto space-y-7">
+    <div className="max-w-xl mx-auto py-10 md:py-20 space-y-6">
+      <h1 className="text-3xl font-bold mb-6 text-center">Order History</h1>
       {orders.map((order) => (
         <div key={order._id}>
-          <div className="flex justify-between items-center">
-            <h2 className="text-lg font-semibold mb-2">
+          <div className="flex flex-col mb-2 md:flex-row md:justify-between md:items-center">
+            <h2 className="text-lg font-semibold">
               {order.createdAt.slice(0, 10)}
             </h2>
             <span className="text-sm text-muted-foreground">
               ORDER: {order._id}
             </span>
           </div>
-          <div className="bg-white rounded-2xl shadow-sm border-1 border-gray-200 p-4">
+          <div className="bg-white rounded-2xl shadow-sm border-1 border-gray-200 p-2 md:p-4">
             {order.lineItems.map((item, index) => (
               <div
                 key={index}
@@ -33,7 +34,9 @@ const OrderHistoryList = () => {
                   </p>
                   <div className="flex gap-3 items-center">
                     <span className="text-md">${item.unitAmount}</span>
-                    <span>{item.quantity}</span>
+                    <span className="text-muted-foreground">
+                      {item.quantity}
+                    </span>
                   </div>
                 </div>
               </div>
