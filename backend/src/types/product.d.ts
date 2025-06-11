@@ -11,3 +11,15 @@ export interface IProduct {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface IProductLineItem {
+  productName: string;
+  unitAmount: number;
+  quantity: number;
+  imageUrl: string;
+}
+
+export interface IOrder extends mongoose.Document {
+  userId: mongoose.Schema.Types.ObjectId;
+  lineItems: IProductLineItem[];
+}
