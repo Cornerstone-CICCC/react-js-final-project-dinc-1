@@ -11,7 +11,7 @@ const OrderHistoryList = () => {
   if (error || !orders) return <div>Error: {error?.message}</div>;
 
   return (
-    <div className="max-w-xl mx-auto py-10 md:py-20 space-y-6">
+    <div className="max-w-xl mx-auto py-10 md:pb-20 space-y-6">
       <h1 className="text-3xl font-bold mb-12 text-center">Order History</h1>
       {orders.map((order) => (
         <div key={order._id}>

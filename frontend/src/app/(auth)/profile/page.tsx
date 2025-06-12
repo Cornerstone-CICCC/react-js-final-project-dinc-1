@@ -6,7 +6,7 @@ import { Suspense, useEffect } from 'react';
 import useUserStore from '@/stores/useUserStore';
 
 const MyProfilePage = () => {
-  const pageTitle = 'Profile - DINCT';
+  const pageTitle = 'Profile';
   const { user } = useUserStore();
   useEffect(() => {
     if (typeof window !== 'undefined') {

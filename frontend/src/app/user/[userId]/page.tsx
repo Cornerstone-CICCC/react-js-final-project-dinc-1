@@ -15,9 +15,9 @@ const UserPage = ({ params }: { params: Promise<PageParams> }) => {
 
   useEffect(() => {
     if (userData) {
-      document.title = `${userData?.name} - DINCT`;
+      document.title = `${userData?.name}`;
     } else {
-      document.title = `User Profile - DINCT`;
+      document.title = `User Profile`;
     }
   }, [document.title, userData]);
 
