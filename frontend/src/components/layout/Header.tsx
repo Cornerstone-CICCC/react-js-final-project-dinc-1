@@ -11,16 +11,17 @@ import {
 } from '@/components/ui/dropdown-menu';
 import useIsMobile from '@/hooks/useIsMobile';
 import { useLogout } from '@/hooks/useLogout';
+import { cn } from '@/lib/utils';
 import useUserStore from '@/stores/useUserStore';
-import { HomeIcon, LogIn, LogOut, Plus, UserRound } from 'lucide-react';
+import { HomeIcon, LogIn, LogOut, Logs, Plus, UserRound } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 const styles = {
   base: 'fixed z-50 flex items-center px-4',
   mobile:
-    'justify-around py-4 shadow-2xs bg-white border-1 bottom-16 rounded-4xl right-5 left-5',
-  pc: 'md:justify-between md:top-0 md:py-2 md:w-full md:border-b-2 md:border-black md:bg-white',
+    'justify-between py-4 shadow-2xs bg-white/70 border-1 bottom-22 rounded-4xl right-5 left-5',
+  pc: 'md:justify-between md:top-0 md:py-2 md:w-full md:bg-white/90',
 };
 
 const Header = () => {
@@ -52,11 +53,11 @@ const Header = () => {
               asChild
               size={'icon'}
               variant={'secondary'}
-              className="size-10 rounded-full px-0 py-0"
+              className="size-10 rounded-md px-0 py-0"
             >
               <Link href="/" className="flex flex-col gap-2">
                 <HomeIcon />
-                <span className="sr-only">DINCT</span>
+                <span className="sr-only">VANCART</span>
               </Link>
             </Button>
           </h1>
@@ -66,7 +67,7 @@ const Header = () => {
                 asChild
                 size={'icon'}
                 variant={'secondary'}
-                className="size-10 rounded-full px-0 py-0"
+                className="size-10 rounded-md px-0 py-0"
               >
                 <Link href={`/work/new`}>
                   <Plus className="size-5" />
@@ -74,7 +75,7 @@ const Header = () => {
               </Button>
               <Button
                 size={'icon'}
-                className="size-10 rounded-full px-0 py-0"
+                className="size-10 rounded-md px-0 py-0"
                 asChild
                 variant={'secondary'}
               >
@@ -90,7 +91,18 @@ const Header = () => {
               </Button>
               <Button
                 size={'icon'}
-                className="size-10 rounded-full px-0 py-0"
+                className="size-10 rounded-md px-0 py-0"
+                asChild
+                variant={'secondary'}
+              >
+                <Link href={`/order-history`}>
+                  <Logs />
+                  <span className="sr-only">Order History</span>
+                </Link>
+              </Button>
+              <Button
+                size={'icon'}
+                className="size-10 rounded-md px-0 py-0"
                 asChild
                 variant={'secondary'}
                 onClick={handleLogout}
@@ -106,7 +118,7 @@ const Header = () => {
               asChild
               size={'icon'}
               variant={'secondary'}
-              className="size-10 rounded-full px-0 py-0"
+              className="size-10 rounded-md px-0 py-0"
             >
               <Link href={`/login`}>
                 <LogIn className="size-5" />
@@ -118,7 +130,7 @@ const Header = () => {
         <header className={`${styles.base} ${styles.pc}`}>
           <h1 className="font-bold">
             <Link href="/" className="flex flex-col gap-2">
-              <span>DINCT</span>
+              <span>VANCART</span>
             </Link>
           </h1>
           <div>
@@ -131,7 +143,7 @@ const Header = () => {
                         asChild
                         size={'icon'}
                         variant={'outline'}
-                        className="size-8 rounded-full px-0 py-0"
+                        className="size-8 rounded-md px-0 py-0"
                       >
                         <Link href={`/work/new`}>
                           <Plus className="size-5" />
@@ -143,9 +155,13 @@ const Header = () => {
                         <DropdownMenuTrigger asChild>
                           <Button
                             size={'icon'}
-                            className="size-8 rounded-full px-0 py-0 align-middle"
+                            className="bg-gray-300 size-8 rounded-md px-0 py-0 align-middle"
                           >
-                            <Avatar className="flex items-center justify-center">
+                            <Avatar
+                              className={cn(
+                                'flex items-center justify-center rounded-md',
+                              )}
+                            >
                               <AvatarImage
                                 src={user.fileId || '/default-profile.png'}
                                 className="object-cover"
@@ -155,6 +171,13 @@ const Header = () => {
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent sideOffset={6} align="end">
+                          <DropdownMenuItem asChild>
+                            <Link href={`/order-history`}>
+                              <Logs />
+                              <span>Order History</span>
+                            </Link>
+                          </DropdownMenuItem>
+                          <DropdownMenuSeparator />
                           <DropdownMenuItem asChild>
                             <Link href={`/profile`}>
                               <UserRound />
