@@ -3,8 +3,7 @@ import { Product } from '@/types/product';
 import { cn, titleToSlug } from '@/lib/utils';
 import { useState, useEffect, Suspense } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { Spinner } from '../ui/spinner';
-
+import ProductListSkeleton from './product-list-skeleton';
 interface ProductListProps {
   userId?: string;
   search?: string;
@@ -131,7 +130,7 @@ const ProductList = ({
         <Suspense
           fallback={
             <div className="flex items-center justify-center w-full h-screen">
-              <Spinner size={'large'}>Loading products...</Spinner>
+              <ProductListSkeleton />
             </div>
           }
         >
@@ -148,8 +147,8 @@ const ProductList = ({
       </div>
       <div ref={ref} className="h-20 w-full"></div>
       {loading && (
-        <div className="fixed top-0 left-0 bg-gray-100/40 rounded-md flex items-center justify-center w-full h-screen">
-          <Spinner size={'large'}>Loading products...</Spinner>
+        <div className="flex items-center justify-center w-full">
+          <ProductListSkeleton />
         </div>
       )}
     </div>
