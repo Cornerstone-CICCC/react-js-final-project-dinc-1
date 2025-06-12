@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import useIsMobile from '@/hooks/useIsMobile';
 import { useLogout } from '@/hooks/useLogout';
+import { useScrollUpDown } from '@/hooks/useScrollUpDown';
 import { cn } from '@/lib/utils';
 import useUserStore from '@/stores/useUserStore';
 import {
@@ -29,11 +30,12 @@ import useCartStore from '@/stores/useCartStore';
 const styles = {
   base: 'fixed z-50 flex items-center px-4',
   mobile:
-    'justify-between py-4 shadow-2xs bg-white/70 border-1 bottom-22 rounded-4xl right-5 left-5',
+    'justify-between py-4 shadow-2xs bg-white/70 border-1 bottom-4 rounded-4xl right-5 left-5',
   pc: 'md:justify-between md:top-0 md:py-2 md:w-full md:bg-white/90',
 };
 
 const Header = () => {
+  const scrollDirection = useScrollUpDown();
   const { user } = useUserStore();
   const { totalItems, setIsOpen } = useCartStore();
   const isMobile = useIsMobile();
@@ -57,7 +59,15 @@ const Header = () => {
   return (
     <>
       {isMobile ? (
-        <header className={`${styles.base} ${styles.mobile}`}>
+        <header
+          className={cn([
+            `${styles.base} ${styles.mobile}`,
+            scrollDirection === 'up'
+              ? 'transform-[translateY(-80)]'
+              : 'transform-[translateY(0)]',
+            'transition duration-500',
+          ])}
+        >
           <h1 className="font-bold">
             <Button
               asChild
@@ -195,7 +205,7 @@ const Header = () => {
                         <DropdownMenuTrigger asChild>
                           <Button
                             size={'icon'}
-                            className="bg-gray-300 size-8 rounded-md px-0 py-0 align-middle"
+                            className="bg-white border size-8 rounded-md px-0 py-0 align-middle"
                           >
                             <Avatar
                               className={cn(
