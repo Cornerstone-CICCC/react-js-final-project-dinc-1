@@ -8,6 +8,7 @@ interface UserState {
   user: User | null;
   setUser: (user: User | null) => void;
   updateUser: (updates: Partial<User>) => void;
+  reset: () => void;
 }
 
 const useUserStore = create<UserState>()(
@@ -19,6 +20,7 @@ const useUserStore = create<UserState>()(
         set((state) => ({
           user: state.user ? { ...state.user, ...updates } : null,
         })),
+      reset: () => set({ user: null }),
     }),
     {
       name: 'user-store',

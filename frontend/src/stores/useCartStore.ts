@@ -13,7 +13,7 @@ interface CartState {
   removeItem: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
   clearCart: () => void;
-  resetCart: () => void;
+  reset: () => void;
   setIsOpen: (isOpen: boolean) => void;
 }
 
@@ -75,7 +75,7 @@ const useCartStore = create<CartState>()(
         set({ items: [], totalItems: 0, totalPrice: 0 });
       },
 
-      resetCart: () => {
+      reset: () => {
         set({ items: [], totalItems: 0, totalPrice: 0, isOpen: false });
       },
 

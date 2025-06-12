@@ -5,6 +5,7 @@ import { jwtVerify } from 'jose';
 const protectedRoutes = [
   '/payment',
   '/work/new',
+  '/work/edit',
   '/profile',
   '/profile/edit',
 ];

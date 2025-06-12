@@ -8,6 +8,7 @@ interface ProductState {
   product: Product | null;
   setProduct: (product: Product | null) => void;
   updateProduct: (updates: Partial<Product>) => void;
+  reset: () => void;
 }
 
 const useProductStore = create<ProductState>()(
@@ -19,6 +20,7 @@ const useProductStore = create<ProductState>()(
         set((state) => ({
           product: state.product ? { ...state.product, ...updates } : null,
         })),
+      reset: () => set({ product: null }),
     }),
     {
       name: 'product-store',
