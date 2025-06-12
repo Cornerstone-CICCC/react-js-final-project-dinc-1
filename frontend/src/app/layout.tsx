@@ -31,10 +31,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-100`}
       >
         <Header />
-        <main className="pb-34 min-h-[calc(100vh-50px-70px)] md:pb-0 md:mt-12">
+        <main className="pb-34 min-h-[calc(100vh-50px-70px)] bg-[length:70%_300px] bg-no-repeat bg-gradient-to-bl from-red-500/50 to-transparent to-50% bg-top-right md:pb-0 md:pt-12">
           {children}
         </main>
         <Footer />
