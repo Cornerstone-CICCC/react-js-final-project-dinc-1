@@ -148,16 +148,32 @@ const Header = () => {
               </Button>
             </>
           ) : (
-            <Button
-              asChild
-              size={'icon'}
-              variant={'secondary'}
-              className="size-10 rounded-md px-0 py-0"
-            >
-              <Link href={`/login`}>
-                <LogIn className="size-5" />
-              </Link>
-            </Button>
+            <>
+              <Button
+                asChild
+                size={'icon'}
+                variant={'secondary'}
+                className="size-10 rounded-md px-0 py-0"
+              >
+                <Link href={`/login`}>
+                  <LogIn className="size-5" />
+                </Link>
+              </Button>
+              <Button
+                size={'icon'}
+                variant={'secondary'}
+                className="size-10 rounded-md px-0 py-0 relative"
+                onClick={() => setIsOpen(true)}
+              >
+                <ShoppingCart className="size-4" />
+                {totalItems > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                    {totalItems > 9 ? '9+' : totalItems}
+                  </span>
+                )}
+                <span className="sr-only">Cart</span>
+              </Button>
+            </>
           )}
         </header>
       ) : (
@@ -244,18 +260,31 @@ const Header = () => {
                     </li>
                   </>
                 ) : (
-                  <li>
-                    <Button
-                      asChild
-                      size={'icon'}
-                      variant={'ghost'}
-                      className="size-8 px-0 py-0"
-                    >
+                  <>
+                    <li>
+                      <Button
+                        size={'icon'}
+                        variant={'outline'}
+                        className="size-8 rounded-md px-0 py-0 relative cursor-pointer"
+                        onClick={() => setIsOpen(true)}
+                      >
+                        <ShoppingCart className="size-4" />
+                        {totalItems > 0 && (
+                          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                            {totalItems > 9 ? '9+' : totalItems}
+                          </span>
+                        )}
+                        <span className="sr-only">Cart</span>
+                      </Button>
+                    </li>
+                    <li>
                       <Link href={`/login`}>
-                        <LogIn className="size-5" />
+                        <Button>
+                          Login
+                        </Button>
                       </Link>
-                    </Button>
-                  </li>
+                    </li>
+                  </>
                 )}
               </ul>
             </nav>

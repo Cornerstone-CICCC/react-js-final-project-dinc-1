@@ -52,6 +52,8 @@ export const ShippingForm = () => {
 
     createCheckoutSession(lineItems);
 
+    useCartStore.getState().reset();
+
     if (checkoutError) {
       console.error(checkoutError);
     }
