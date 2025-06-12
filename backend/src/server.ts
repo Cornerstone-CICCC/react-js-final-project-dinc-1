@@ -6,6 +6,8 @@ import cookieParser from 'cookie-parser';
 import authRouter from './routes/authRoutes';
 import userRouter from './routes/userRoutes';
 import productRouter from './routes/productRoutes';
+import checkoutRouter from './routes/checkoutRoutes';
+import orderRouter from './routes/orderRoutes';
 import cartRouter from './routes/cartRoutes';
 
 dotenv.config();
@@ -30,6 +32,8 @@ app.get('/', (req: Request, res: Response) => {
 app.use('/auth', authRouter);
 app.use('/products', productRouter);
 app.use('/users', userRouter);
+app.use('/checkout', checkoutRouter);
+app.use('/orders', orderRouter);
 app.use('/cart', cartRouter);
 
 const PORT = process.env.PORT || 4500;

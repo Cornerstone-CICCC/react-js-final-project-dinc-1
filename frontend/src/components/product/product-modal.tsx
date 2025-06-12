@@ -14,6 +14,8 @@ import useUserStore from '@/stores/useUserStore';
 import { slugToTitle } from '@/lib/utils';
 import ProductSkeleton from '@/components/product/product-detail-skeleton';
 import { useRouter } from 'next/navigation';
+import { useAddToCart } from '@/hooks/useAddToCart';
+import { Spinner } from '../ui/spinner';
 
 type ProductModalProps = {
   productId: string;
@@ -25,6 +27,7 @@ const ProductModal = ({ productId, open, onClose }: ProductModalProps) => {
   const router = useRouter();
   const { user } = useUserStore();
   const { data, error, isFetching } = useWork(productId);
+  const { addToCart, loading } = useAddToCart();
   const [currentImg, setCurrentImg] = useState<string>('');
   const isOwner = data?.user?.id === user?.id;
 
@@ -36,6 +39,14 @@ const ProductModal = ({ productId, open, onClose }: ProductModalProps) => {
 
   const handleImageChange = (url: string) => {
     setCurrentImg(url);
+  };
+
+  const handleAddToCart = async () => {
+    if (!data) return;
+    const success = await addToCart(data);
+    if (success) {
+      onClose();
+    }
   };
 
   if (isFetching) {
@@ -178,7 +189,7 @@ const ProductModal = ({ productId, open, onClose }: ProductModalProps) => {
 
                 {isOwner ? (
                   <Button
-                    className="w-full h-12"
+                    className="w-full h-12 cursor-pointer"
                     size={'lg'}
                     onClick={() => {
                       onClose();
@@ -187,24 +198,27 @@ const ProductModal = ({ productId, open, onClose }: ProductModalProps) => {
                       }, 100);
                     }}
                   >
-                    <span className="uppercase text-lg">Edit</span>
+                    <span className="uppercase">Edit</span>
                   </Button>
                 ) : data.status === 'active' ? (
                   <Button
-                    className="w-full h-12"
+                    className="w-full h-12 cursor-pointer"
                     size={'lg'}
-                    onClick={() => {
-                      onClose();
-                      setTimeout(() => {
-                        router.push('/payment');
-                      }, 100);
-                    }}
+                    onClick={handleAddToCart}
+                    disabled={loading}
                   >
-                    <span className="uppercase text-lg">Purchase</span>
+                    {loading ? (
+                      <div className="flex items-center justify-center">
+                        <Spinner size={'small'} className="text-white" />
+                        <span className="ml-2">Adding...</span>
+                      </div>
+                    ) : (
+                      <span className="uppercase">Add to Cart</span>
+                    )}
                   </Button>
                 ) : (
                   <Button className="w-full h-12" size={'lg'} disabled>
-                    <span className="uppercase text-lg">Soldout</span>
+                    <span className="uppercase">Sold Out</span>
                   </Button>
                 )}
               </div>

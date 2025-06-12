@@ -13,9 +13,18 @@ import useIsMobile from '@/hooks/useIsMobile';
 import { useLogout } from '@/hooks/useLogout';
 import { cn } from '@/lib/utils';
 import useUserStore from '@/stores/useUserStore';
-import { HomeIcon, LogIn, LogOut, Logs, Plus, UserRound } from 'lucide-react';
+import {
+  HomeIcon,
+  LogIn,
+  LogOut,
+  Logs,
+  Plus,
+  UserRound,
+  ShoppingCart,
+} from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import useCartStore from '@/stores/useCartStore';
 
 const styles = {
   base: 'fixed z-50 flex items-center px-4',
@@ -26,6 +35,7 @@ const styles = {
 
 const Header = () => {
   const { user } = useUserStore();
+  const { totalItems, setIsOpen } = useCartStore();
   const isMobile = useIsMobile();
   const [mounted, setMoundted] = useState(false);
 
@@ -75,7 +85,21 @@ const Header = () => {
               </Button>
               <Button
                 size={'icon'}
-                className="size-10 rounded-md px-0 py-0"
+                variant={'secondary'}
+                className="size-10 rounded-full px-0 py-0 relative"
+                onClick={() => setIsOpen(true)}
+              >
+                <ShoppingCart className="size-5" />
+                {totalItems > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                    {totalItems > 9 ? '9+' : totalItems}
+                  </span>
+                )}
+                <span className="sr-only">Cart</span>
+              </Button>
+              <Button
+                size={'icon'}
+                className="size-10 rounded-full px-0 py-0"
                 asChild
                 variant={'secondary'}
               >
@@ -148,6 +172,22 @@ const Header = () => {
                         <Link href={`/work/new`}>
                           <Plus className="size-5" />
                         </Link>
+                      </Button>
+                    </li>
+                    <li>
+                      <Button
+                        size={'icon'}
+                        variant={'outline'}
+                        className="size-8 rounded-full px-0 py-0 relative cursor-pointer"
+                        onClick={() => setIsOpen(true)}
+                      >
+                        <ShoppingCart className="size-4" />
+                        {totalItems > 0 && (
+                          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                            {totalItems > 9 ? '9+' : totalItems}
+                          </span>
+                        )}
+                        <span className="sr-only">Cart</span>
                       </Button>
                     </li>
                     <li>
