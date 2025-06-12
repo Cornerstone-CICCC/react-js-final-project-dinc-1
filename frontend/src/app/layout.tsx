@@ -7,6 +7,7 @@ import Footer from '@/components/layout/Footer';
 import { CartSidebar } from '@/components/cart/cart-sidebar';
 import usePreserveSearchParams from '@/hooks/usePreserveSearchParams';
 import { ReactNode } from 'react';
+import { Toaster } from 'react-hot-toast';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -38,6 +39,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <CartSidebar />
+        <Toaster />
         {modal}
       </body>
     </html>

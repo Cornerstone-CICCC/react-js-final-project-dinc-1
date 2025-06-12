@@ -77,6 +77,7 @@ const CartItemsList = () => {
                   variant="outline"
                   className="h-6 w-6 p-0"
                   onClick={() => updateQuantity(item.productId, item.quantity - 1)}
+                  disabled={item.quantity <= 1}
                 >
                   <Minus className="h-3 w-3" />
                 </Button>
