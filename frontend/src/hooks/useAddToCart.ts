@@ -20,6 +20,7 @@ export const useAddToCart = () => {
         price: product.price,
         imageUrl: product.imageUrls[0] || '',
         quantity: quantity,
+        seller: product.user,
       };
 
       addItem(cartItem);

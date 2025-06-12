@@ -17,8 +17,8 @@ const ItemList = () => {
                 src={product?.user.fileId || '/default-profile.png'}
                 alt={product?.user.name}
               />
-              </Avatar>
-              <p className="truncate font-semibold">{product?.user.name}</p>
+            </Avatar>
+            <p className="truncate font-semibold">{product?.user.name}</p>
           </div>
         </div>
         <div className="flex justify-start items-start gap-4">

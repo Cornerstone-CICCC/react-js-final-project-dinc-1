@@ -15,8 +15,18 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { LineItem } from '@/types/product';
 import { useCheckout } from '@/hooks/useCheckout';
+import useCartStore from '@/stores/useCartStore';
 
-export const ShippingForm = () => {
+type ShippingFormProps = {
+  submitButtonRef?: React.RefObject<HTMLButtonElement | null>;
+  hideSubmitButton?: boolean;
+};
+
+export const ShippingForm = ({
+  submitButtonRef,
+  hideSubmitButton,
+}: ShippingFormProps) => {
+  const { items } = useCartStore();
   const { createCheckoutSession, loading, checkoutError } = useCheckout();
 
   const form = useForm<ShippingFormInputs>({
@@ -33,27 +43,21 @@ export const ShippingForm = () => {
     },
   });
 
-  const onSubmit = (data: ShippingFormInputs) => {
+  const onSubmit = async (data: ShippingFormInputs) => {
     console.log(data);
 
     const purchaseData: { line_items: LineItem[] } = {
       line_items: [
-        {
-          productName: 'Sample Product2',
-          unitAmount: 1,
-          quantity: 1,
-          imageUrl: '/product1.png',
-        },
-        {
-          productName: 'Another Product',
-          unitAmount: 1,
-          quantity: 2,
-          imageUrl: '/product2.png',
-        },
+        ...items.map((item) => ({
+          productName: item.name,
+          unitAmount: item.price,
+          quantity: item.quantity,
+          imageUrl: item.imageUrl || '/placeholder-product.png',
+        })),
       ],
     };
 
-    createCheckoutSession(purchaseData.line_items);
+    await createCheckoutSession(purchaseData.line_items);
 
     if (checkoutError) {
       console.error(checkoutError);
@@ -210,8 +214,9 @@ export const ShippingForm = () => {
         </form>
       </Form>
 
-      <div className="flex justify-end">
+      <div className={`flex justify-end ${hideSubmitButton ? 'hidden' : ''}`}>
         <Button
+          ref={submitButtonRef}
           type="submit"
           className="lg:w-1/2 w-full p-5"
           disabled={loading}
