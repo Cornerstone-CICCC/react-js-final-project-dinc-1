@@ -15,9 +15,11 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { LineItem } from '@/types/product';
 import { useCheckout } from '@/hooks/useCheckout';
+import useCartStore from '@/stores/useCartStore';
 
 export const ShippingForm = () => {
   const { createCheckoutSession, loading, checkoutError } = useCheckout();
+  const { items: cartItems } = useCartStore();
 
   const form = useForm<ShippingFormInputs>({
     resolver: zodResolver(shippingSchema),
@@ -36,24 +38,19 @@ export const ShippingForm = () => {
   const onSubmit = (data: ShippingFormInputs) => {
     console.log(data);
 
-    const purchaseData: { line_items: LineItem[] } = {
-      line_items: [
-        {
-          productName: 'Sample Product2',
-          unitAmount: 1,
-          quantity: 1,
-          imageUrl: '/product1.png',
-        },
-        {
-          productName: 'Another Product',
-          unitAmount: 1,
-          quantity: 2,
-          imageUrl: '/product2.png',
-        },
-      ],
-    };
+    const lineItems: LineItem[] = cartItems.map(item => ({
+      productName: item.name,
+      unitAmount: item.price,
+      quantity: item.quantity,
+      imageUrl: item.imageUrl,
+    }));
 
-    createCheckoutSession(purchaseData.line_items);
+    if (lineItems.length === 0) {
+      console.error('Cart is empty');
+      return;
+    }
+
+    createCheckoutSession(lineItems);
 
     if (checkoutError) {
       console.error(checkoutError);
