@@ -10,9 +10,16 @@ import { Button } from '@/components/ui/button';
 import useCartStore from '@/stores/useCartStore';
 import { ShoppingBag, Package, Minus, Plus, Trash2 } from 'lucide-react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 export const CartSidebar = () => {
   const { isOpen, setIsOpen, items, totalItems, totalPrice } = useCartStore();
+  const router = useRouter();
+
+  const handleCheckout = () => {
+    setIsOpen(false);
+    router.push('/payment');
+  };
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -38,7 +45,7 @@ export const CartSidebar = () => {
               <span>Total:</span>
               <span>${totalPrice.toLocaleString()}</span>
             </div>
-            <Button className="w-full cursor-pointer" size="lg">
+            <Button className="w-full cursor-pointer" size="lg" onClick={() => handleCheckout()}>
               <span className="uppercase">Proceed to Checkout</span>
             </Button>
           </div>
