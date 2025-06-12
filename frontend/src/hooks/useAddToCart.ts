@@ -4,9 +4,10 @@ import { useState } from 'react';
 import useCartStore from '@/stores/useCartStore';
 import { CartItem } from '@/types/cart';
 import { Product } from '@/types/product';
+import toast from 'react-hot-toast';
 
 export const useAddToCart = () => {
-  const { addItem, setIsOpen } = useCartStore();
+  const { addItem } = useCartStore();
   const [loading, setLoading] = useState(false);
 
   const addToCart = async (product: Product, quantity: number = 1) => {
@@ -23,7 +24,11 @@ export const useAddToCart = () => {
       };
 
       addItem(cartItem);
-      setIsOpen(true);
+
+      toast.success(`${product.name} added to cart!`, {
+        duration: 3000,
+      });
+
       return true;
     } catch (error) {
       console.error('Failed to add item to cart:', error);
