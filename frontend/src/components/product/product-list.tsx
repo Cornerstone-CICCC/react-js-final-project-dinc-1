@@ -125,7 +125,7 @@ const ProductList = ({
   }
 
   return (
-    <div className="w-full p-2">
+    <div className="w-full pb-10">
       <div className="flex max-w-full w-full flex-1 md:pb-6 relative">
         <Suspense
           fallback={
@@ -136,7 +136,7 @@ const ProductList = ({
         >
           <div
             className={cn(
-              'grid grid-cols-2 gap-1 w-full md:grid-cols-2 lg:grid-cols-5 sm:gap-2 lg:gap-4',
+              'grid grid-cols-2 gap-1 w-full md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-2 md:gap-4',
             )}
           >
             {products.map((product) => (

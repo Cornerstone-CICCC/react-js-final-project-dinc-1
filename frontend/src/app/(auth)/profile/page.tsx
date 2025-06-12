@@ -19,7 +19,7 @@ const MyProfilePage = () => {
   }
 
   return (
-    <div className="px-0 sm:px-10 lg:px-16 py-14">
+    <div className="px-0 sm:px-10 lg:px-16">
       <Head>
         <title>{document.title}</title>
       </Head>
