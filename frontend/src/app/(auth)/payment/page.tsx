@@ -3,7 +3,7 @@ import ItemList from '@/components/payment/item-list';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Payment - DINCT',
+  title: 'Payment',
   description: 'Payment',
 };
 

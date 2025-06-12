@@ -4,7 +4,6 @@ import { cn } from '@/lib/utils';
 
 const Footer = () => {
   const scrollDirection = useScrollUpDown();
-  console.log(scrollDirection);
   return (
     <footer
       className={cn([
@@ -20,10 +19,14 @@ const Footer = () => {
       <nav aria-label="Footer navigation">
         <ul className="flex flex-col gap-2 text-right">
           <li>
-            <Link href="/about">ABOUT</Link>
+            <Link className="hover:underline" href="/about">
+              ABOUT
+            </Link>
           </li>
           <li>
-            <Link href="/contact">CONTACT US</Link>
+            <Link className="hover:underline" href="/contact">
+              CONTACT US
+            </Link>
           </li>
         </ul>
       </nav>

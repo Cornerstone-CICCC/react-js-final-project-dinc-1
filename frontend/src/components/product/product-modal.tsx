@@ -1,6 +1,12 @@
 'use client';
 
-import { Dialog, DialogContent, DialogOverlay, DialogPortal } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogOverlay,
+  DialogPortal,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -21,7 +27,7 @@ type ProductModalProps = {
   productId: string;
   open: boolean;
   onClose: () => void;
-}
+};
 
 const ProductModal = ({ productId, open, onClose }: ProductModalProps) => {
   const router = useRouter();
@@ -58,6 +64,7 @@ const ProductModal = ({ productId, open, onClose }: ProductModalProps) => {
             className="!max-w-none !w-[70vw] !max-h-[95vh] overflow-y-auto p-0 !z-[9999]"
             style={{ width: '70vw', maxWidth: 'none', zIndex: 9999 }}
           >
+            <DialogTitle className="sr-only">Loading</DialogTitle>
             <ProductSkeleton />
           </DialogContent>
         </DialogPortal>
@@ -70,7 +77,11 @@ const ProductModal = ({ productId, open, onClose }: ProductModalProps) => {
       <Dialog open={open} onOpenChange={onClose} modal={false}>
         <DialogPortal>
           <DialogOverlay className="!z-[9998]" style={{ zIndex: 9998 }} />
-          <DialogContent className="max-w-md !z-[9999]" style={{ zIndex: 9999 }}>
+          <DialogContent
+            className="max-w-md !z-[9999]"
+            style={{ zIndex: 9999 }}
+          >
+            <DialogTitle className="sr-only">Error</DialogTitle>
             <div className="p-4">
               <h2 className="text-lg font-semibold mb-2">Error</h2>
               <p>{error?.message || 'Failed to load product'}</p>
@@ -104,6 +115,7 @@ const ProductModal = ({ productId, open, onClose }: ProductModalProps) => {
           className="!max-w-none !w-[70vw] !max-h-[95vh] overflow-y-auto p-0 !z-[9999]"
           style={{ width: '70vw', maxWidth: 'none', zIndex: 9999 }}
         >
+          <DialogTitle className="sr-only">Product modal</DialogTitle>
           <div className="p-6">
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
               <div className="w-full">
@@ -118,12 +130,13 @@ const ProductModal = ({ productId, open, onClose }: ProductModalProps) => {
                       />
                     )}
                   </div>
-                  <div className="flex gap-2 justify-center w-full flex-wrap">
+                  <div className="flex gap-2 justify-end max-w-[600px] w-full mx-auto flex-wrap">
                     {data.imageUrls?.map((url, i) => (
                       <button
                         key={i}
                         className={cn({
-                          'bg-zinc-100 size-20 relative border-2 border-white hover:border-gray-300': true,
+                          'bg-zinc-100 size-20 relative border-2 border-white hover:border-gray-300':
+                            true,
                           'border-2 border-black': url === currentImg,
                         })}
                         onClick={() => handleImageChange(url)}
@@ -142,12 +155,18 @@ const ProductModal = ({ productId, open, onClose }: ProductModalProps) => {
                 </div>
               </div>
               <div className="space-y-6 w-full">
-                <h2 className="text-3xl xl:text-4xl font-bold break-words">{data.name}</h2>
+                <h2 className="text-3xl xl:text-4xl font-bold break-words">
+                  {data.name}
+                </h2>
                 <div className="flex gap-2">
-                  <Badge variant={'outline'}>{slugToTitle(data.categorySlug)}</Badge>
+                  <Badge variant={'outline'}>
+                    {slugToTitle(data.categorySlug)}
+                  </Badge>
                 </div>
                 <div className="space-y-2">
-                  <div className="text-3xl xl:text-4xl font-bold">$ {data.price}</div>
+                  <div className="text-3xl xl:text-4xl font-bold">
+                    $ {data.price}
+                  </div>
                   <div className="text-sm text-muted-foreground flex items-center flex-wrap">
                     <span>
                       {data.user?.location
@@ -161,7 +180,9 @@ const ProductModal = ({ productId, open, onClose }: ProductModalProps) => {
                 <div className="space-y-4 p-6 bg-zinc-50 rounded-lg">
                   <h3 className="text-xl font-bold">Details</h3>
                   <div className="text-muted-foreground">
-                    <p className="leading-relaxed whitespace-pre-wrap break-words">{data.description}</p>
+                    <p className="leading-relaxed whitespace-pre-wrap break-words">
+                      {data.description}
+                    </p>
                   </div>
                 </div>
                 <div className="w-full flex items-center space-x-4 p-4 bg-zinc-50 rounded-lg">
@@ -177,7 +198,9 @@ const ProductModal = ({ productId, open, onClose }: ProductModalProps) => {
                       onClick={() => {
                         onClose();
                         setTimeout(() => {
-                          router.push(isOwner ? `/profile` : `/user/${data.user?.id}`);
+                          router.push(
+                            isOwner ? `/profile` : `/user/${data.user?.id}`,
+                          );
                         }, 100);
                       }}
                       className="hover:underline"

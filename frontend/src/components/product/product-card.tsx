@@ -10,14 +10,14 @@ const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <Link
       href={`/product/${product._id}`}
-      className="flex flex-col w-full cursor-pointer hover:opacity-80"
+      className="flex flex-col w-full cursor-pointer hover:opacity-80 gap-3"
     >
-      <div className="relative aspect-square rounded bg-gray-200">
+      <div className="relative aspect-square rounded-md overflow-hidden">
         <Image
           src={product.imageUrls[0]}
           alt={product.name}
           fill
-          className="object-cover p-1"
+          className="object-cover"
         />
         {!product.status && (
           <div className="absolute inset-0 rounded bg-stone-950/75 flex items-center justify-center">

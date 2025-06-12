@@ -28,10 +28,10 @@ import { useEffect, useState } from 'react';
 import useCartStore from '@/stores/useCartStore';
 
 const styles = {
-  base: 'fixed z-50 flex items-center px-4',
+  base: 'z-50 flex items-center px-4',
   mobile:
-    'justify-between py-4 shadow-2xs bg-white/70 border-1 bottom-4 rounded-4xl right-5 left-5',
-  pc: 'md:justify-between md:top-0 md:py-2 md:w-full md:bg-white/90',
+    'fixed justify-between py-4 shadow-2xs bg-white/70 border-1 bottom-4 rounded-4xl right-5 left-5',
+  pc: 'md:sticky md:justify-between md:top-0 md:py-2 md:w-full md:bg-white/90',
 };
 
 const Header = () => {

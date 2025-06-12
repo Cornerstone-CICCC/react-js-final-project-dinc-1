@@ -6,7 +6,7 @@ import { useLogin } from '@/hooks/useLogin';
 import LoginForm from '@/components/auth/LoginForm';
 
 const LoginPage = () => {
-  const pageTitle = 'Login - DINCT';
+  const pageTitle = 'Login';
   const { error, login, loading, setError } = useLogin();
 
   useEffect(() => {
