@@ -86,7 +86,7 @@ const Header = () => {
               <Button
                 size={'icon'}
                 variant={'secondary'}
-                className="size-10 rounded-full px-0 py-0 relative"
+                className="size-10 rounded-md px-0 py-0 relative"
                 onClick={() => setIsOpen(true)}
               >
                 <ShoppingCart className="size-5" />
@@ -99,7 +99,7 @@ const Header = () => {
               </Button>
               <Button
                 size={'icon'}
-                className="size-10 rounded-full px-0 py-0"
+                className="size-10 rounded-md px-0 py-0"
                 asChild
                 variant={'secondary'}
               >
@@ -178,7 +178,7 @@ const Header = () => {
                       <Button
                         size={'icon'}
                         variant={'outline'}
-                        className="size-8 rounded-full px-0 py-0 relative cursor-pointer"
+                        className="size-8 rounded-md px-0 py-0 relative cursor-pointer"
                         onClick={() => setIsOpen(true)}
                       >
                         <ShoppingCart className="size-4" />
