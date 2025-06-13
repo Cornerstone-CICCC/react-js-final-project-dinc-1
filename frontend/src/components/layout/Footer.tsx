@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <footer
       className={cn([
-        'fixed bottom-0 left-0 w-full bg-white px-4 py-4 text-sm flex justify-between items-center transition duration-400 transform-[translateY(100)] md:items-end md:static md:gap-10 md:py-6 md:flex-row md:transform-none shadow-lg',
+        'fixed bottom-0 left-0 w-full bg-white px-4 py-4 text-sm flex justify-between items-center transition duration-400 transform-[translateY(100)] md:items-end  md:gap-10 md:py-6 md:flex-row shadow-lg',
         scrollDirection === 'up'
           ? 'transform-[translateY(0)]'
           : 'transform-[translateY(100)]',

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 const PaymentPage = () => {
   return (
-    <div className="min-h-screen p-4 lg:px-20 lg:py-10 bg-gray-50">
+    <div className="min-h-screen p-4 lg:px-20 lg:py-10">
       <div className="flex gap-8 lg:flex-row flex-col">
         <div className="flex-1">
           <ItemList />
