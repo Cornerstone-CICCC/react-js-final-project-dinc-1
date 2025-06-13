@@ -29,8 +29,8 @@ const ProductDetail = ({ params }: { params: Promise<PageParams> }) => {
   const isOwner = data?.user?.id === user?.id;
 
   useEffect(() => {
-    document.title = `${data?.name}`;
-  }, [document.title, data]);
+    document.title = `${data?.name} - VanCart`;
+  }, [data]);
 
   useEffect(() => {
     if (data?.imageUrls && data.imageUrls.length > 0) {

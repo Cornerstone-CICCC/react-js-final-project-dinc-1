@@ -15,11 +15,11 @@ const UserPage = ({ params }: { params: Promise<PageParams> }) => {
 
   useEffect(() => {
     if (userData) {
-      document.title = `${userData?.name}`;
+      document.title = `${userData?.name} - VanCart`;
     } else {
-      document.title = `User Profile`;
+      document.title = `User Profile - VanCart`;
     }
-  }, [document.title, userData]);
+  }, [userData]);
 
   if (!userData || isError) {
     return <div>User not found</div>;
