@@ -3,8 +3,7 @@ import { Product } from '@/types/product';
 import { cn, titleToSlug } from '@/lib/utils';
 import { useState, useEffect, Suspense } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { Spinner } from '../ui/spinner';
-
+import ProductListSkeleton from './product-list-skeleton';
 interface ProductListProps {
   userId?: string;
   search?: string;
@@ -126,18 +125,18 @@ const ProductList = ({
   }
 
   return (
-    <div className="w-full p-2">
+    <div className="w-full p-4 md:p-0 md:pb-10">
       <div className="flex max-w-full w-full flex-1 md:pb-6 relative">
         <Suspense
           fallback={
             <div className="flex items-center justify-center w-full h-screen">
-              <Spinner size={'large'}>Loading products...</Spinner>
+              <ProductListSkeleton />
             </div>
           }
         >
           <div
             className={cn(
-              'grid grid-cols-2 gap-1 w-full md:grid-cols-2 lg:grid-cols-5 sm:gap-2 lg:gap-4',
+              'grid grid-cols-2 gap-3 w-full md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-4',
             )}
           >
             {products.map((product) => (
@@ -148,8 +147,8 @@ const ProductList = ({
       </div>
       <div ref={ref} className="h-20 w-full"></div>
       {loading && (
-        <div className="fixed top-0 left-0 bg-gray-100/40 rounded-md flex items-center justify-center w-full h-screen">
-          <Spinner size={'large'}>Loading products...</Spinner>
+        <div className="flex items-center justify-center w-full">
+          <ProductListSkeleton />
         </div>
       )}
     </div>

@@ -11,20 +11,33 @@ import {
 } from '@/components/ui/dropdown-menu';
 import useIsMobile from '@/hooks/useIsMobile';
 import { useLogout } from '@/hooks/useLogout';
+import { useScrollUpDown } from '@/hooks/useScrollUpDown';
+import { cn } from '@/lib/utils';
 import useUserStore from '@/stores/useUserStore';
-import { HomeIcon, LogIn, LogOut, Plus, UserRound } from 'lucide-react';
+import {
+  HomeIcon,
+  LogIn,
+  LogOut,
+  Logs,
+  Plus,
+  UserRound,
+  ShoppingCart,
+} from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import useCartStore from '@/stores/useCartStore';
 
 const styles = {
-  base: 'fixed z-200 flex items-center px-4',
+  base: 'z-50 flex items-center px-4',
   mobile:
-    'justify-around py-4 shadow-2xs bg-white border-1 bottom-16 rounded-4xl right-5 left-5',
-  pc: 'md:justify-between md:top-0 md:py-2 md:w-full md:border-b-2 md:border-black md:bg-white',
+    'fixed justify-between py-4 shadow-2xs bg-white/70 border-1 bottom-4 rounded-4xl right-5 left-5',
+  pc: 'md:sticky md:justify-between md:top-0 md:py-2 md:w-full md:bg-white/90',
 };
 
 const Header = () => {
+  const scrollDirection = useScrollUpDown();
   const { user } = useUserStore();
+  const { totalItems, setIsOpen } = useCartStore();
   const isMobile = useIsMobile();
   const [mounted, setMoundted] = useState(false);
 
@@ -46,17 +59,25 @@ const Header = () => {
   return (
     <>
       {isMobile ? (
-        <header className={`${styles.base} ${styles.mobile}`}>
+        <header
+          className={cn([
+            `${styles.base} ${styles.mobile}`,
+            scrollDirection === 'up'
+              ? 'transform-[translateY(-80)]'
+              : 'transform-[translateY(0)]',
+            'transition duration-500',
+          ])}
+        >
           <h1 className="font-bold">
             <Button
               asChild
               size={'icon'}
               variant={'secondary'}
-              className="size-10 rounded-full px-0 py-0"
+              className="size-10 rounded-md px-0 py-0"
             >
               <Link href="/" className="flex flex-col gap-2">
                 <HomeIcon />
-                <span className="sr-only">DINCT</span>
+                <span className="sr-only">VANCART</span>
               </Link>
             </Button>
           </h1>
@@ -66,7 +87,7 @@ const Header = () => {
                 asChild
                 size={'icon'}
                 variant={'secondary'}
-                className="size-10 rounded-full px-0 py-0"
+                className="size-10 rounded-md px-0 py-0"
               >
                 <Link href={`/work/new`}>
                   <Plus className="size-5" />
@@ -74,7 +95,21 @@ const Header = () => {
               </Button>
               <Button
                 size={'icon'}
-                className="size-10 rounded-full px-0 py-0"
+                variant={'secondary'}
+                className="size-10 rounded-md px-0 py-0 relative"
+                onClick={() => setIsOpen(true)}
+              >
+                <ShoppingCart className="size-5" />
+                {totalItems > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                    {totalItems > 9 ? '9+' : totalItems}
+                  </span>
+                )}
+                <span className="sr-only">Cart</span>
+              </Button>
+              <Button
+                size={'icon'}
+                className="size-10 rounded-md px-0 py-0"
                 asChild
                 variant={'secondary'}
               >
@@ -90,7 +125,18 @@ const Header = () => {
               </Button>
               <Button
                 size={'icon'}
-                className="size-10 rounded-full px-0 py-0"
+                className="size-10 rounded-md px-0 py-0"
+                asChild
+                variant={'secondary'}
+              >
+                <Link href={`/order-history`}>
+                  <Logs />
+                  <span className="sr-only">Order History</span>
+                </Link>
+              </Button>
+              <Button
+                size={'icon'}
+                className="size-10 rounded-md px-0 py-0"
                 asChild
                 variant={'secondary'}
                 onClick={handleLogout}
@@ -102,23 +148,39 @@ const Header = () => {
               </Button>
             </>
           ) : (
-            <Button
-              asChild
-              size={'icon'}
-              variant={'secondary'}
-              className="size-10 rounded-full px-0 py-0"
-            >
-              <Link href={`/login`}>
-                <LogIn className="size-5" />
-              </Link>
-            </Button>
+            <>
+              <Button
+                asChild
+                size={'icon'}
+                variant={'secondary'}
+                className="size-10 rounded-md px-0 py-0"
+              >
+                <Link href={`/login`}>
+                  <LogIn className="size-5" />
+                </Link>
+              </Button>
+              <Button
+                size={'icon'}
+                variant={'secondary'}
+                className="size-10 rounded-md px-0 py-0 relative"
+                onClick={() => setIsOpen(true)}
+              >
+                <ShoppingCart className="size-4" />
+                {totalItems > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                    {totalItems > 9 ? '9+' : totalItems}
+                  </span>
+                )}
+                <span className="sr-only">Cart</span>
+              </Button>
+            </>
           )}
         </header>
       ) : (
         <header className={`${styles.base} ${styles.pc}`}>
           <h1 className="font-bold">
             <Link href="/" className="flex flex-col gap-2">
-              <span>DINCT</span>
+              <span>VANCART</span>
             </Link>
           </h1>
           <div>
@@ -131,7 +193,7 @@ const Header = () => {
                         asChild
                         size={'icon'}
                         variant={'outline'}
-                        className="size-8 rounded-full px-0 py-0"
+                        className="size-8 rounded-md px-0 py-0"
                       >
                         <Link href={`/work/new`}>
                           <Plus className="size-5" />
@@ -139,13 +201,33 @@ const Header = () => {
                       </Button>
                     </li>
                     <li>
+                      <Button
+                        size={'icon'}
+                        variant={'outline'}
+                        className="size-8 rounded-md px-0 py-0 relative cursor-pointer"
+                        onClick={() => setIsOpen(true)}
+                      >
+                        <ShoppingCart className="size-4" />
+                        {totalItems > 0 && (
+                          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                            {totalItems > 9 ? '9+' : totalItems}
+                          </span>
+                        )}
+                        <span className="sr-only">Cart</span>
+                      </Button>
+                    </li>
+                    <li>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <Button
                             size={'icon'}
-                            className="size-8 rounded-full px-0 py-0 align-middle"
+                            className="bg-white border size-8 rounded-md px-0 py-0 align-middle"
                           >
-                            <Avatar className="flex items-center justify-center">
+                            <Avatar
+                              className={cn(
+                                'flex items-center justify-center rounded-md',
+                              )}
+                            >
                               <AvatarImage
                                 src={user.fileId || '/default-profile.png'}
                                 className="object-cover"
@@ -155,6 +237,13 @@ const Header = () => {
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent sideOffset={6} align="end">
+                          <DropdownMenuItem asChild>
+                            <Link href={`/order-history`}>
+                              <Logs />
+                              <span>Order History</span>
+                            </Link>
+                          </DropdownMenuItem>
+                          <DropdownMenuSeparator />
                           <DropdownMenuItem asChild>
                             <Link href={`/profile`}>
                               <UserRound />
@@ -171,18 +260,31 @@ const Header = () => {
                     </li>
                   </>
                 ) : (
-                  <li>
-                    <Button
-                      asChild
-                      size={'icon'}
-                      variant={'ghost'}
-                      className="size-8 px-0 py-0"
-                    >
+                  <>
+                    <li>
+                      <Button
+                        size={'icon'}
+                        variant={'outline'}
+                        className="size-8 rounded-md px-0 py-0 relative cursor-pointer"
+                        onClick={() => setIsOpen(true)}
+                      >
+                        <ShoppingCart className="size-4" />
+                        {totalItems > 0 && (
+                          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                            {totalItems > 9 ? '9+' : totalItems}
+                          </span>
+                        )}
+                        <span className="sr-only">Cart</span>
+                      </Button>
+                    </li>
+                    <li>
                       <Link href={`/login`}>
-                        <LogIn className="size-5" />
+                        <Button>
+                          Login
+                        </Button>
                       </Link>
-                    </Button>
-                  </li>
+                    </li>
+                  </>
                 )}
               </ul>
             </nav>

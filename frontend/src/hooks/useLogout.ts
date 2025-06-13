@@ -1,9 +1,8 @@
-import useUserStore from '@/stores/useUserStore';
 import { useRouter } from 'next/navigation';
+import { resetAllStores } from '@/lib/resetStores';
 
 export const useLogout = () => {
   const router = useRouter();
-  const { setUser } = useUserStore();
 
   const logout = async () => {
     try {
@@ -17,7 +16,7 @@ export const useLogout = () => {
       }
 
       localStorage.removeItem('token');
-      setUser(null);
+      await resetAllStores();
 
       router.push('/login');
 

@@ -12,3 +12,17 @@ export interface Product {
   updatedAt: string;
   user: User;
 }
+
+export interface LineItem {
+  productName: string;
+  unitAmount: number;
+  quantity: number;
+  imageUrl: string;
+}
+
+export interface Order {
+  _id: string;
+  userId: string;
+  lineItems: LineItem[];
+  createdAt: string;
+}

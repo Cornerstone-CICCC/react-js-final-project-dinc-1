@@ -12,6 +12,8 @@ import { useWork } from '@/hooks/useWork';
 import useUserStore from '@/stores/useUserStore';
 import { slugToTitle } from '@/lib/utils';
 import ProductSkeleton from '@/components/product/product-detail-skeleton';
+import { useAddToCart } from '@/hooks/useAddToCart';
+import { Spinner } from '@/components/ui/spinner';
 
 type PageParams = {
   productId: string;
@@ -22,12 +24,13 @@ const ProductDetail = ({ params }: { params: Promise<PageParams> }) => {
   const { productId } = resolvedParams;
   const { user } = useUserStore();
   const { data, error, isFetching } = useWork(productId);
+  const { addToCart, loading } = useAddToCart();
   const [currentImg, setCurrentImg] = useState<string>('');
   const isOwner = data?.user?.id === user?.id;
 
   useEffect(() => {
-    document.title = `${data?.name} - DINCT`;
-  }, [document.title, data]);
+    document.title = `${data?.name} - VanCart`;
+  }, [data]);
 
   useEffect(() => {
     if (data?.imageUrls && data.imageUrls.length > 0) {
@@ -38,6 +41,11 @@ const ProductDetail = ({ params }: { params: Promise<PageParams> }) => {
 
   const handleImageChange = (url: string) => {
     setCurrentImg(url);
+  };
+
+  const handleAddToCart = async () => {
+    if (!data) return;
+    await addToCart(data);
   };
 
   if (isFetching) {
@@ -145,10 +153,20 @@ const ProductDetail = ({ params }: { params: Promise<PageParams> }) => {
               </Link>
             </Button>
           ) : data.status === 'active' ? (
-            <Button className="w-full" size={'lg'} asChild>
-              <Link href="/payment">
-                <span className="uppercase">Purchase</span>
-              </Link>
+            <Button
+              className="w-full cursor-pointer"
+              size={'lg'}
+              onClick={handleAddToCart}
+              disabled={loading}
+            >
+              {loading ? (
+                <div className="flex items-center justify-center">
+                  <Spinner size={'small'} className="text-white" />
+                  <span className="ml-2">Adding...</span>
+                </div>
+              ) : (
+                <span className="uppercase">Add to Cart</span>
+              )}
             </Button>
           ) : (
             <Button className="w-full" size={'lg'} disabled>

@@ -1,29 +1,23 @@
 import Image from 'next/image';
 import { Product } from '@/types/product';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 interface ProductCardProps {
   product: Product;
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
-  const router = useRouter();
-
-  const handleClick = () => {
-    router.push(`/product/${product._id}`);
-  };
-
   return (
-    <div
-      className="flex flex-col w-full cursor-pointer hover:opacity-80"
-      onClick={handleClick}
+    <Link
+      href={`/product/${product._id}`}
+      className="flex flex-col w-full cursor-pointer hover:opacity-80 gap-3"
     >
-      <div className="relative aspect-square rounded bg-gray-200">
+      <div className="relative aspect-square rounded-md overflow-hidden">
         <Image
           src={product.imageUrls[0]}
           alt={product.name}
           fill
-          className="object-cover p-1"
+          className="object-cover"
         />
         {!product.status && (
           <div className="absolute inset-0 rounded bg-stone-950/75 flex items-center justify-center">
@@ -35,7 +29,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         <p className="font-bold mt-1 text-base">${product.price}</p>
         <h2 className="line-clamp-2 text-xs md:text-sm">{product.name}</h2>
       </div>
-    </div>
+    </Link>
   );
 };
 

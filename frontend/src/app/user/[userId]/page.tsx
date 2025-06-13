@@ -15,11 +15,11 @@ const UserPage = ({ params }: { params: Promise<PageParams> }) => {
 
   useEffect(() => {
     if (userData) {
-      document.title = `${userData?.name} - DINCT`;
+      document.title = `${userData?.name} - VanCart`;
     } else {
-      document.title = `User Profile - DINCT`;
+      document.title = `User Profile - VanCart`;
     }
-  }, [document.title, userData]);
+  }, [userData]);
 
   if (!userData || isError) {
     return <div>User not found</div>;
@@ -30,7 +30,7 @@ const UserPage = ({ params }: { params: Promise<PageParams> }) => {
   }
 
   return (
-    <div className="px-0 sm:px-10 lg:px-16 py-14">
+    <div className="px-0 sm:px-10 lg:px-16">
       <Suspense fallback={<ProfileSkeleton isOwnProfile={false} />}>
         <ProfileUI user={userData} isOwnProfile={false} />
       </Suspense>
