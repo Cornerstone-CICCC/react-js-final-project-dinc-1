@@ -5,7 +5,7 @@ import SignupForm from '@/components/auth/SignupForm';
 import { useEffect } from 'react';
 
 const SignupPage = () => {
-  const pageTitle = 'Signup';
+  const pageTitle = 'Signup - VanCart';
   const { signup, loading, error, setError } = useSignup();
 
   useEffect(() => {

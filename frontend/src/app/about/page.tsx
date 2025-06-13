@@ -1,6 +1,11 @@
 import { AuroraText } from '@/components/magicui/aurora-text';
 import Link from 'next/link';
 
+export const metadata = {
+  title: 'About - VanCart',
+  description: 'Learn more about VanCart, our mission, values, and team.',
+};
+
 const About = () => {
   return (
     <div className="px-4">

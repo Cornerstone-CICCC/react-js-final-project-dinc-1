@@ -73,6 +73,7 @@ const ProductModal = ({ productId, open, onClose }: ProductModalProps) => {
   }
 
   if (error || !data) {
+    document.title = 'Error Loading Product...';
     return (
       <Dialog open={open} onOpenChange={onClose} modal={false}>
         <DialogPortal>
@@ -106,6 +107,8 @@ const ProductModal = ({ productId, open, onClose }: ProductModalProps) => {
       : diffInHours < 24
         ? `${diffInHours} hours ago`
         : `${diffInDays} days ago`;
+
+  document.title = `${data.name} - VanCart`;
 
   return (
     <Dialog open={open} onOpenChange={onClose}>

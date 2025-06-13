@@ -7,7 +7,7 @@ import { useGoogleAuth } from '@/hooks/useGoogleAuth';
 import { Spinner } from '@/components/ui/spinner';
 
 export default function AuthCallback() {
-  const pageTitle = 'Login';
+  const pageTitle = 'Login - VanCart';
   const [message, setMessage] = useState('');
   const router = useRouter();
   const searchParams = useSearchParams();

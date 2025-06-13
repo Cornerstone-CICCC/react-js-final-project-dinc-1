@@ -2,7 +2,7 @@ import MainContainer from '@/components/home/main-container';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Home',
+  title: 'Home - VanCart',
   description: 'Home page',
 };
 

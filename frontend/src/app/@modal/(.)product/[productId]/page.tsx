@@ -25,6 +25,7 @@ const ProductModalPage = () => {
 
   const handleClose = () => {
     router.back();
+    document.title = 'Home - VanCart';
   };
 
   return (
