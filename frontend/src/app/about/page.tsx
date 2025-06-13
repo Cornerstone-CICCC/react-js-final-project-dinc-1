@@ -1,4 +1,5 @@
 import { AuroraText } from '@/components/magicui/aurora-text';
+import Image from 'next/image';
 import Link from 'next/link';
 
 const About = () => {
@@ -115,23 +116,50 @@ const About = () => {
           <div className="max-w-4xl mx-auto">
             <ul className="grid grid-cols-2 gap-3 md:grid-cols-4">
               <li className="flex flex-col items-center text-center h-full bg-gradient-to-t from-gray-100 to-gray-50 rounded-xl p-5">
-                <div className="rounded-full w-[100px] h-[100px] bg-white mb-2"></div>
+                <div className="rounded-full w-[100px] h-[100px] bg-white mb-2 relative overflow-hidden">
+                  <Image
+                    fill
+                    src="/avatar/avatar_4.png"
+                    alt="Iki's avatar"
+                    className="translate-y-3"
+                  />
+                </div>
                 <strong className="font-semibold">Iki</strong>
-                <span className="text-sm">Community & Experience Lead</span>
+                <span className="text-sm">
+                  Community & <br />
+                  Experience Lead
+                </span>
                 <span className="text-xs text-muted-foreground">
                   Keeps everything running smoothly.
                 </span>
               </li>
               <li className="flex flex-col items-center text-center h-full bg-gradient-to-t from-gray-100 to-gray-50 rounded-xl p-5">
-                <div className="rounded-full w-[100px] h-[100px] bg-white mb-2"></div>
+                <div className="rounded-full w-[100px] h-[100px] bg-white mb-2 relative overflow-hidden">
+                  <Image
+                    fill
+                    src="/avatar/avatar_3.png"
+                    alt="Nana's avatar"
+                    className="translate-y-3"
+                  />
+                </div>
                 <strong className="font-semibold">Nana</strong>
-                <span className="text-sm">Founder & Creative Director</span>
+                <span className="text-sm">
+                  Founder & <br />
+                  Creative Director
+                </span>
                 <span className="text-xs text-muted-foreground">
                   Shapes the vision, design, and experience of Vancart
                 </span>
               </li>
               <li className="flex flex-col items-center text-center h-full bg-gradient-to-t from-gray-100 to-gray-50 rounded-xl p-5">
-                <div className="rounded-full w-[100px] h-[100px] bg-white mb-2"></div>
+                <div className="rounded-full w-[100px] h-[100px] bg-white mb-2 relative overflow-hidden">
+                  <Image
+                    fill
+                    src="/avatar/avatar_1.png"
+                    alt="Daz's avatar"
+                    className="translate-y-3"
+                  />
+                </div>
                 <strong className="font-semibold">Daz</strong>
                 <span className="text-sm">Engineer</span>
                 <span className="text-xs text-muted-foreground">
@@ -139,7 +167,14 @@ const About = () => {
                 </span>
               </li>
               <li className="flex flex-col items-center text-center h-full bg-gradient-to-t from-gray-100 to-gray-50 rounded-xl p-5">
-                <div className="rounded-full w-[100px] h-[100px] bg-white mb-2"></div>
+                <div className="rounded-full w-[100px] h-[100px] bg-white mb-2 relative overflow-hidden">
+                  <Image
+                    fill
+                    src="/avatar/avatar_2.png"
+                    alt="Chloe's avatar"
+                    className="translate-y-3"
+                  />
+                </div>
                 <strong className="font-semibold">Chloe</strong>
                 <span className="text-sm">Marketing & Growth</span>
                 <span className="text-xs text-muted-foreground">
