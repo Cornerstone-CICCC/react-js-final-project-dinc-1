@@ -1,5 +1,4 @@
 'use client';
-import emailjs from '@emailjs/browser';
 
 import {
   Form,
@@ -15,12 +14,10 @@ import { useForm } from 'react-hook-form';
 import { Button } from '../ui/button';
 import { ContactFormData, contactFormSchema } from '@/schemas/contactSchema';
 import { Textarea } from '../ui/textarea';
-// import { useRouter } from 'next/navigation';
 import { CommonAlert } from '../ui/common-alert';
 import { useState } from 'react';
 
 const ContactForm = () => {
-  // const [showDialog, setShowDialog] = useState<boolean>(false);
   const [alertConfig, setAlertConfig] = useState<{
     show: boolean;
     variant: 'default' | 'destructive';
@@ -32,10 +29,6 @@ const ContactForm = () => {
     title: '',
     description: '',
   });
-
-  // const router = useRouter();
-
-  // const [showAlert, setShowAlert] = useState<boolean>(false);
 
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
@@ -50,40 +43,16 @@ const ContactForm = () => {
   });
 
   const onSubmit = async (data: ContactFormData) => {
-    try {
-      const { name, email, contact, address, message } = data;
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const result = await res.json();
 
-      const result = await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        {
-          name,
-          email,
-          contact,
-          address,
-          message,
-          to_name: 'Happy Shopping DINCA',
-        },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
-      );
-
-      if (result.status === 200) {
-        setAlertConfig({
-          show: true,
-          variant: 'default',
-          title: 'We Got Your Message!',
-          description: 'Your message was sent successfully. Thank you!',
-        });
-      }
-      form.reset({
-        name: '',
-        email: '',
-        contact: '',
-        address: '',
-        message: '',
-      });
-    } catch (error) {
-      console.error(error);
+    if (!result) {
       setAlertConfig({
         show: true,
         variant: 'destructive',
@@ -91,20 +60,34 @@ const ContactForm = () => {
         description:
           'There was a problem sending your message. Please try again.',
       });
+    } else {
+      setAlertConfig({
+        show: true,
+        variant: 'default',
+        title: 'We Got Your Message!',
+        description: 'Your message was sent successfully. Thank you!',
+      });
+      form.reset({
+        name: '',
+        email: '',
+        contact: '',
+        address: '',
+        message: '',
+      });
     }
   };
 
   return (
     <>
-      <div className="pb-6">
-        <CommonAlert
-          show={alertConfig.show}
-          variant={alertConfig.variant}
-          title={alertConfig.title}
-          description={alertConfig.description}
-        />
-      </div>
       <div className="max-w-xl mx-auto py-10 md:py-20">
+        <div className="pb-6">
+          <CommonAlert
+            show={alertConfig.show}
+            variant={alertConfig.variant}
+            title={alertConfig.title}
+            description={alertConfig.description}
+          />
+        </div>
         <div className="space-y-3 mb-8">
           <h1 className="text-3xl font-bold text-center">Contact Us</h1>
           <h3 className="text-xl text-center">
