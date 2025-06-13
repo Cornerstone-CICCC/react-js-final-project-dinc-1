@@ -15,7 +15,7 @@ const MainContainer = () => {
     : preservedSearchParams;
   const searchQuery = currentSearchParams?.get('search') || '';
   const searchCategory = currentSearchParams?.get('category') || '';
-  const [debouncedHandleSearch] = useDebounce(searchQuery, 1000);
+  const [debouncedHandleSearch] = useDebounce(searchQuery, 800);
 
   return (
     <div className="min-h-[calc(100vh-50px-70px)] w-full md:flex md:px-8 md:gap-8">
