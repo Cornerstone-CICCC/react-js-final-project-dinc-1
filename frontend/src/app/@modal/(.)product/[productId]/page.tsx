@@ -1,7 +1,7 @@
 'use client';
 
 import ProductModal from '@/components/product/product-modal';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter, usePathname, useParams } from 'next/navigation';
 import { useEffect } from 'react';
 import useSearchParamsStore from '@/stores/useSearchParamsStore';
 
@@ -9,9 +9,10 @@ type PageParams = {
   productId: string;
 };
 
-const ProductModalPage = ({ params }: { params: PageParams }) => {
+const ProductModalPage = () => {
   const router = useRouter();
   const pathname = usePathname();
+  const params = useParams<PageParams>();
   const { productId } = params;
   const { preservedSearchParams } = useSearchParamsStore();
 
@@ -27,11 +28,7 @@ const ProductModalPage = ({ params }: { params: PageParams }) => {
   };
 
   return (
-    <ProductModal
-      productId={productId}
-      open={true}
-      onClose={handleClose}
-    />
+    <ProductModal productId={productId} open={true} onClose={handleClose} />
   );
 };
 
