@@ -16,8 +16,12 @@ const OrderHistoryList = () => {
       {orders.map((order) => (
         <div key={order._id}>
           <div className="flex flex-col mb-2 md:flex-row md:justify-between md:items-center">
-            <h2 className="text-lg">
-              {order.createdAt.slice(0, 10)} {order.createdAt.slice(11, 19)}
+            <h2 className="">
+              {new Date(order.createdAt).toLocaleDateString('en-us', {
+                year: 'numeric',
+                month: 'long',
+                day: '2-digit',
+              })}
             </h2>
             <span className="text-sm text-muted-foreground">
               ORDER ID: {order._id}
