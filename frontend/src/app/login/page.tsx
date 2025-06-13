@@ -16,7 +16,7 @@ const LoginPage = () => {
   }, [pageTitle]);
 
   return (
-    <div className="min-h-screen flex items-center bg-gray-100 justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center p-4">
       <div className="w-full max-w-md space-y-8 bg-white p-8 rounded-xl shadow-sm">
         <div className="space-y-2 text-center">
           <h1 className="text-2xl font-semibold tracking-tight">
