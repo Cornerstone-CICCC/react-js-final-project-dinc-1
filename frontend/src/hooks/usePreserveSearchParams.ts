@@ -8,7 +8,7 @@ const usePreserveSearchParams = () => {
   const { setPreservedSearchParams } = useSearchParamsStore();
 
   useEffect(() => {
-    if (pathname === '/' && searchParams.toString()) {
+    if (pathname === '/') {
       setPreservedSearchParams(new URLSearchParams(searchParams.toString()));
     }
   }, [pathname, searchParams, setPreservedSearchParams]);
